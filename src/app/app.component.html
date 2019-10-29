@@ -1,0 +1,90 @@
+<div id ="split-left">
+	<div class = "bg">
+	    
+		<div id="div4">
+		Advanced Track Project (ESC101) 
+	    </div>
+	    
+		<div id = "div6">
+
+		<p>
+
+		This is the Auto-Grader Project by:
+		<br>
+		1. 
+		<a href = "http://home.iitk.ac.in/~sarthakr">Sarthak Rout</a>
+		<br>
+		2. <a href = "http://home.iitk.ac.in/~namangup">Naman Gupta</a>
+
+
+		<br>
+		<br>
+	    Under Professor:
+        <br>
+		<a href = "https://www.cse.iitk.ac.in/users/piyush/">Dr. Piyush Rai</a>  
+		<br>
+	    Under Mentor:
+	    <br>
+		Shailesh Nandkule 
+        </p>
+	    </div>
+	    
+	    <p>
+
+
+
+		<br>
+		<br>
+        This project is designed to evaluate answer-sheets using Machine Learning for Character Recognition using the HOG Descriptor. The frontend has been designed with the help of Angular and HTML5 while the backend uses OpenCV library with C++ on Visual Studio 2019 for Image Processing.The server (probably) uses a Python http.server and uses PHP to evaluate requests.
+        <br>
+        <br>
+
+        <br>
+        </p>
+        
+    </div>
+</div>
+
+<div id = "split-right">
+<div id = "div7">
+	Step 1: Upload the Question Paper
+	<br>
+	Step 2:	Choose 2 pre-decided reference points and fill up the form for each question and answer 
+	<br>
+	<input (change)="onFileSelected2()" type="file" id="file">
+	
+</div>
+	<div id = "div8" (click) = "showcoord($event)">
+	
+  <pdf-viewer [src]="pdfSrc"
+  			  [show-borders]="true"
+              [original-size]="true"
+              [zoom]="zoom_to"
+  ></pdf-viewer>
+</div>
+<div id = "div9">
+	<p>
+	X coords : {{x}} Y coords : {{y}}
+	</p>
+	&nbsp;&nbsp;
+	<button type="button" (click) = "zoom_in()"> Zoom In </button>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button type="button" (click) = "zoom_out()"> Zoom Out </button>
+	&nbsp;&nbsp;
+	<form [formGroup] = "myForm" (ngSubmit) = "onSubmit()" novalidate>
+
+		Xref1: <input formControlName="xref11" size="1"/><br>
+		Yref1: <input formControlName="yref11" size="1"/><br>
+		<button type="button" (change)="setRef1()"> Set Reference 1 </button> <br>
+
+		Type:
+		<select formControlName = "type" novalidate>
+			<option *ngFor = "let choice of types" [value] = "choice">
+			{{choice}}</option>
+		</select>
+		<br>
+		<button type = "submit" (change) = "onSubmit($event)"> Send </button> 
+	</form>
+
+</div>
+</div>
