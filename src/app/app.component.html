@@ -18,7 +18,6 @@
 
 
 		<br>
-		<br>
 	    Under Professor:
         <br>
 		<a href = "https://www.cse.iitk.ac.in/users/piyush/">Dr. Piyush Rai</a>  
@@ -30,61 +29,76 @@
 	    </div>
 	    
 	    <p>
-
-
-
-		<br>
-		<br>
         This project is designed to evaluate answer-sheets using Machine Learning for Character Recognition using the HOG Descriptor. The frontend has been designed with the help of Angular and HTML5 while the backend uses OpenCV library with C++ on Visual Studio 2019 for Image Processing.The server (probably) uses a Python http.server and uses PHP to evaluate requests.
-        <br>
-        <br>
-
-        <br>
         </p>
         
     </div>
 </div>
 
 <div id = "split-right">
-<div id = "div7">
-	Step 1: Upload the Question Paper
-	<br>
-	Step 2:	Choose 2 pre-decided reference points and fill up the form for each question and answer 
-	<br>
-	<input (change)="onFileSelected2()" type="file" id="file">
-	
-</div>
-	<div id = "div8" (click) = "showcoord($event)">
-	
+	<div id = "div8"  
+	(click) = "showcoord($event)" 
+	(dragstart) = "cord($event)"
+	draggable = "false"
+	>
   <pdf-viewer [src]="pdfSrc"
   			  [show-borders]="true"
               [original-size]="true"
               [zoom]="zoom_to"
   ></pdf-viewer>
 </div>
+
+
+
 <div id = "div9">
-	<p>
-	X coords : {{x}} Y coords : {{y}}
-	</p>
-	&nbsp;&nbsp;
-	<button type="button" (click) = "zoom_in()"> Zoom In </button>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<button type="button" (click) = "zoom_out()"> Zoom Out </button>
-	&nbsp;&nbsp;
-	<form [formGroup] = "myForm" (ngSubmit) = "onSubmit()" novalidate>
+	<input (change)="onFileSelected2()" type="file" class="form-control-file" id="file">
+	<h4>
+		X : {{x}}     Y : {{y}}
+	</h4>
 
-		Xref1: <input formControlName="xref11" size="1"/><br>
-		Yref1: <input formControlName="yref11" size="1"/><br>
-		<button type="button" (change)="setRef1()"> Set Reference 1 </button> <br>
 
-		Type:
-		<select formControlName = "type" novalidate>
-			<option *ngFor = "let choice of types" [value] = "choice">
-			{{choice}}</option>
-		</select>
+	<div class="row">
+			<div class="col-xs-5">
+				<button type="button" class="btn btn-info" (click) = "zoom_in()"> Zoom In </button>
+			</div>
+			<div class="col-xs-5">
+				<button type="button" class="btn btn-info" (click) = "zoom_out()">Zoom Out </button>
+			</div>
+	</div>
+
+
+	&nbsp;&nbsp;
+
+
+	<form [formGroup] = "myForm" class="form-group" (ngSubmit) = "onSubmit()" novalidate>
+
+
+		<div class="row">
+			<div class="col-xs-6">
+				Xref11: <input formControlName="xref11" id = "xref11" class="form-control" /> 
+			</div>
+			<div class="col-xs-6">
+				Yref11: <input formControlName="yref11" id = "yref11" class="form-control " />
+			</div>
+		</div>
+
+
+		<div class = "row">
+			<div class="text-center">
+				<button type = "button" (click) =  "setRef1()" class="btn btn-primary btn-sm"> Set Reference 1 </button> <br>
+			</div>
+		</div>
+
+
+		Type: <select formControlName = "type" class="form-control form-control-sm" novalidate>
+				 <option *ngFor = "let choice of types" [value] = "choice">{{choice}}</option>
+			  </select>
 		<br>
-		<button type = "submit" (change) = "onSubmit($event)"> Send </button> 
+		<div class = "row">
+			<div class="text-center">
+				<button type = "button" class="btn btn-primary" (click) = "OnSubmit()"> Send </button> 
+			</div>
+		</div>
+		
 	</form>
-
-</div>
 </div>

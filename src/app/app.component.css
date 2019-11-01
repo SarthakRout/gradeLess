@@ -1,3 +1,4 @@
+
 #div1{
 	position:absolute;
 	left:10px;
@@ -58,7 +59,8 @@
 
 }
 .bg{
-	background-image: linear-gradient(to right, rgba(173,255,47,1), rgba(0,0,0,0),  rgba(173,255,47,1));
+	
+	background-color: #F0FFF0;
 	height:100%;
 	padding:10px;
 	border-right: 2px solid black;
@@ -72,17 +74,19 @@
 	position:absolute;
 	top:0;
 	left:0;
+
 }
 #div8{
 	position:absolute;
-	top:50px;
+	top:0;
 }
 #div9{
 	position:fixed;
 	height:100%;
-	background-image: linear-gradient(to right, rgba(173,255,47,1), rgba(0,0,0,0),  rgba(173,255,47,1));
+	background-color: #F0FFF0;
 	top:0;
 	right:0;
+	left:1120px;
 	border-left: 2px solid black;
 	padding:5px;
 }
@@ -91,7 +95,7 @@
   height:100%;
   z-index: 1;
   top: 0;
-  width: 20%;
+  width: 16%;
   left: 0;
 }
 #split-right{
@@ -99,6 +103,6 @@
   height:100%;
   z-index: 1;
   top: 0;
-  width: 80%;
+  width: 84%;
   right: 0;
 }

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
+function hello() {
+    alert('Hello!!!');
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,34 +14,29 @@ export class AppComponent {
   title = 'Auto - Grader Project';
   x = 0; 
   y = 0;
-  zoom_to = 1;
+  zoom_to = 0.75;
   pdfSrc:string = null;
-  myForm:FormGroup;
-  types = ['single-correct', 'multiple-correct', 'true/false']
+  types = ['select-type', 'true/false','single-correct', 'multiple-correct']
+
+ myForm: FormGroup;
 
  constructor(){
- 	this.myForm = this.createFormGroup();
- }
-
- createFormGroup(){
- 	return new FormGroup({
- 		xref11: new FormControl(),
- 		yref11: new FormControl(),
- 		page: new FormControl(),
- 		type: new FormControl(),
+ 	this.myForm = new FormGroup({
+ 		xref11: new FormControl(0),
+ 		yref11: new FormControl(0),
+ 		type: new FormControl(this.types[0])
  	});
  }
  
- 
-  setRef1(event){
-  	
+  coord = {
+ 	'xref11': this.x,
+ 	'yref11': this.y
+ };
+  setRef1(){
+  	//this.myForm.setValue(xref11:)
+  	console.log("function is called");
+  	this.myForm.patchValue({xref11:this.x,yref11:this.y});
   }
-
-
-
-
-
-
   onFileSelected2(){
   let $img: any = document.querySelector('#file');
 
@@ -63,6 +62,14 @@ export class AppComponent {
   	if(this.zoom_to > 0.5){
   		this.zoom_to = this.zoom_to - 0.1;
   	}
+  }
+  OnSubmit(){
+  	hello();
+  }
+  cord(event){
+  	console.log("working");
+  	console.log("X:" + this.x);
+  	console.log("Y:" + this.y);
   }
   
 }
