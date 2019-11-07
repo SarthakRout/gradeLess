@@ -31,7 +31,6 @@
 	    <p>
         This project is designed to evaluate answer-sheets using Machine Learning for Character Recognition using the HOG Descriptor. The frontend has been designed with the help of Angular and HTML5 while the backend uses OpenCV library with C++ on Visual Studio 2019 for Image Processing.The server (probably) uses a Python http.server and uses PHP to evaluate requests.
         </p>
-        
     </div>
 </div>
 
@@ -51,7 +50,8 @@
 
 
 <div id = "div9">
-	<input (change)="onFileSelected2()" type="file" class="form-control-file" id="file">
+	<input (change)="onFileSelected2($event)" type="file" class="form-control-file" id="file">
+	<button type ="button" (click)="onUpload()">Upload PDF</button>
 	<h4>
 		X : {{x}}     Y : {{y}}
 	</h4>
@@ -70,7 +70,7 @@
 	&nbsp;&nbsp;
 
 
-	<form [formGroup] = "myForm" class="form-group" (ngSubmit) = "onSubmit()" novalidate>
+	<form [formGroup] = "myForm" class="form-group" novalidate>
 
 
 		<div class="row">
@@ -96,9 +96,10 @@
 		<br>
 		<div class = "row">
 			<div class="text-center">
-				<button type = "button" class="btn btn-primary" (click) = "OnSubmit()"> Send </button> 
+				<button type = "submit" class="btn btn-primary" (click) = "OnSubmit()"> Send </button> 
 			</div>
 		</div>
 		
 	</form>
+
 </div>

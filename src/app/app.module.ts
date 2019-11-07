@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { PdfUploaderComponent } from './pdf-uploader/pdf-uploader.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ReactiveFormsModule, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { HttpClientModule} from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,6 +18,7 @@ import { ReactiveFormsModule, FormArray, FormBuilder, FormControl, FormGroup } f
     AppRoutingModule,
     PdfViewerModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
