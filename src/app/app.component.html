@@ -1,105 +1,154 @@
-<div id ="split-left">
-	<div class = "bg">
-	    
-		<div id="div4">
-		Advanced Track Project (ESC101) 
-	    </div>
-	    
-		<div id = "div6">
-
-		<p>
-
-		This is the Auto-Grader Project by:
-		<br>
-		1. 
-		<a href = "http://home.iitk.ac.in/~sarthakr">Sarthak Rout</a>
-		<br>
-		2. <a href = "http://home.iitk.ac.in/~namangup">Naman Gupta</a>
-
-
-		<br>
-	    Under Professor:
-        <br>
-		<a href = "https://www.cse.iitk.ac.in/users/piyush/">Dr. Piyush Rai</a>  
-		<br>
-	    Under Mentor:
-	    <br>
-		Shailesh Nandkule 
-        </p>
-	    </div>
-	    
-	    <p>
-        This project is designed to evaluate answer-sheets using Machine Learning for Character Recognition using the HOG Descriptor. The frontend has been designed with the help of Angular and HTML5 while the backend uses OpenCV library with C++ on Visual Studio 2019 for Image Processing.The server (probably) uses a Python http.server and uses PHP to evaluate requests.
-        </p>
-    </div>
-</div>
+<div id ="about">
+		<p id="heading">gradeLess</p>
+		<div id="subhead">
+			<p id="tag"><i>An Effortless Grading Solution</i></p>
+		</div>
+		<p id="in-content">	
+			This project is a part of the course <b>ESC101 : Fundamentals 
+			of Computing</b> at
+			<b>Indian Institute of Technology , Kanpur</b>.
+			<br>
+				gradeLess is an intelligent tool designed to evaluate 
+				hand-written 
+				answer copies using 
+				Machine Learning for Character Recognition effortlessly to save
+				the precious time of instructors and tutors grading answers manually.<br>
+				Currently we support questions with binary answers (True / False) , we
+				plan to extend full support for Multiple Choice Questions .<br>
+				The Frontend is designed using CSS and JS (for the beauty part) and 
+				Angular 8 for most of the actual work ,that is evaluation of answer copies.<br>
+				The backend uses OpenCV for image processing and employs 
+				Machine Learning Algorithms for correctly evaluating the answers.
+		</p>
+	</div>
+<div id="actualwork">
 
 <div id = "split-right">
-	<div id = "div8"  
-	(click) = "showcoord($event)" 
-	(dragstart) = "cord($event)"
-	draggable = "false"
-	>
-  <pdf-viewer [src]="pdfSrc"
-  			  [show-borders]="true"
-              [original-size]="true"
-              [zoom]="zoom_to"
-  ></pdf-viewer>
-</div>
-
-
-
-<div id = "div9">
-	<input (change)="onFileSelected2($event)" type="file" class="form-control-file" id="file">
-	<button type ="button" (click)="onUpload()">Upload PDF</button>
-	<h4>
-		X : {{x}}     Y : {{y}}
-	</h4>
-
-
-	<div class="row">
+		<div id = "coord_display"  (click) = "showcoord($event)" 
+		(dragstart) = "cord($event)" draggable = "false">
+		<div id="pdfdisplay">
+	  <pdf-viewer [src]="pdfSrc" [show-borders]="true" [original-size]="true"
+	  [zoom]="zoom_to"></pdf-viewer>
+	  </div>
+	</div>
+	
+	<div id = "uploadpdf">
+		<input (change)="onFileSelected2($event)" type="file" class="form-control-file" id="file">
+		<button type ="button" (click)="onUpload()">Upload PDF</button>
+		<h4>
+			X : {{x}}     Y : {{y}}
+		</h4>
+	
+	
+		<div class="row">
 			<div class="col-xs-5">
-				<button type="button" class="btn btn-info" (click) = "zoom_in()"> Zoom In </button>
+			<button type="button" class="btn btn-info" (click) = "zoom_in()"> Zoom In </button>
 			</div>
 			<div class="col-xs-5">
-				<button type="button" class="btn btn-info" (click) = "zoom_out()">Zoom Out </button>
+			<button type="button" class="btn btn-info" (click) = "zoom_out()">Zoom Out </button>
 			</div>
+		</div>
+	
+	
+		&nbsp;&nbsp;
+	
+	
+		<form [formGroup] = "myForm" class="form-group" novalidate>
+	
+	
+			<div class="row">
+				<div class="col-xs-6">
+					Xref11: <input formControlName="xref11" id = "xref11" class="form-control" /> 
+				</div>
+				<div class="col-xs-6">
+					Yref11: <input formControlName="yref11" id = "yref11" class="form-control " />
+				</div>
+			</div>
+	
+	
+			<div class = "row">
+				<div class="text-center">
+					<button type = "button" (click) =  "setRef1()" class="btn btn-primary btn-sm"> Set Reference 1 </button> <br>
+				</div>
+			</div>
+	
+	
+			Type: <select formControlName = "type" class="form-control form-control-sm" novalidate>
+					 <option *ngFor = "let choice of types" [value] = "choice">{{choice}}</option>
+				  </select>
+			<br>
+			<div class = "row">
+				<div class="text-center">
+					<button type = "submit" class="btn btn-primary" (click) = "OnSubmit()"> Send </button> 
+				</div>
+			</div>
+			
+		</form>
+	
+	</div>
 	</div>
 
-
-	&nbsp;&nbsp;
-
-
-	<form [formGroup] = "myForm" class="form-group" novalidate>
-
-
-		<div class="row">
-			<div class="col-xs-6">
-				Xref11: <input formControlName="xref11" id = "xref11" class="form-control" /> 
+		<div id="devs">
+			<div id="headdev"><p id="devteam">Developers</p>
+				<p id="mentors">Mentors</p></div>
+				
+				<div id="dev1">
+						<img id="pic" src="../assets/sarthak.jpg">
+						<p id="name">Sarthak Rout</p>
+						<p>Bachelor of Technology<br>
+							Dept. of Computer Science and Engineering
+							<br>IIT Kanpur</p>
+						
+						<a href= "http://home.iitk.ac.in/~sarthakr">
+							<img id="weblogo" src="../assets/weblogo.svg">
+						</a>
+						<a href= "fblink">
+							<img id="fb" src="../assets/fb.svg">
+						</a>
+						<a href="mailto:sarthakr@iitk.ac.in">
+							<img id="mail" src="../assets/maillogo.svg">
+						</a>
+					</div>
+					<div id="dev2">
+							<img id="pic" src="../assets/naman.jpg">
+							<p id="name">Naman Gupta</p>
+							<p>Bachelor of Technology<br>
+								Dept. of Computer Science and Engineering
+								<br>IIT Kanpur</p>
+							<a href= "http://home.iitk.ac.in/~namangup">
+								<img id="weblogo" src="../assets/weblogo.svg">
+							</a>
+							<a href= "fblink">
+								<img id="fb" src="../assets/fb.svg">
+							</a>
+							<a href="mailto:namangup@iitk.ac.in">
+								<img id="mail" src="../assets/maillogo.svg">
+							</a>
+						</div>
+			
+			<div id="prof">
+					<img id="pic" src="../assets/piyush.jpg">
+					<p id="name">Dr. Piyush Rai</p>
+					<p>Assistant Professor<br>Dept. of Computer Science and Engineering
+						<br>IIT Kanpur</p>
+					<a href= "link">
+						<img id="weblogo" src="../assets/weblogo.svg">
+					</a>
+					<a href="mailto">
+						<img id="mail" src="../assets/maillogo.svg">
+					</a>
 			</div>
-			<div class="col-xs-6">
-				Yref11: <input formControlName="yref11" id = "yref11" class="form-control " />
+			<div id="mentor">
+					<img id="pic" src="../assets/shailesh.jpg">
+					<p id="name">Shailesh</p>
+					<p>Text<br>Dept. of Computer Science and Engineering
+						<br>IIT Kanpur</p>
+					<a href= "link">
+						<img id="weblogo" src="../assets/weblogo.svg">
+					</a>
+					<a href="mailto">
+						<img id="mail" src="../assets/maillogo.svg">
+					</a>
 			</div>
 		</div>
 
-
-		<div class = "row">
-			<div class="text-center">
-				<button type = "button" (click) =  "setRef1()" class="btn btn-primary btn-sm"> Set Reference 1 </button> <br>
-			</div>
-		</div>
-
-
-		Type: <select formControlName = "type" class="form-control form-control-sm" novalidate>
-				 <option *ngFor = "let choice of types" [value] = "choice">{{choice}}</option>
-			  </select>
-		<br>
-		<div class = "row">
-			<div class="text-center">
-				<button type = "submit" class="btn btn-primary" (click) = "OnSubmit()"> Send </button> 
-			</div>
-		</div>
-		
-	</form>
-
-</div>

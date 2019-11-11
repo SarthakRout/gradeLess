@@ -1,108 +1,116 @@
-
-#div1{
-	position:absolute;
-	left:10px;
-	color: blue;
-	font-size: 30px;
-	background-image: linear-gradient(to right, rgba(173,255,47,1), rgba(0,0,0,0));
-	width:45%;
-	border: 15px solid transparent;
-	border-image: url(border.png) 20 stretch ;
-	transition: transform .2s;
-	padding:5px;
-	float: left;
+/* You can add global styles to this file, and also import other style files */
+body{
+    font-family: 'Lato', sans-serif;
+    font-size:16px;
 }
-#div1:hover{
-	transform: scale(1.03);
+div{
+    box-sizing: border-box;
 }
-#div2{
-	position:absolute;
-	right:10px;
-	color: orange;
-	font-size: 30px;
-	background-image: linear-gradient(to left, rgba(173,255,47,1), rgba(0,0,0,0));
-	width:45%;
-	
-	border:15px solid transparent;
-	border-image: url(border.png) 20 stretch ;
-	transition: transform .2s;
-	padding:5px;
+#about{
+    width:100%;
+    background-image: url(src/assets/dot-grid.png);
+    padding-left: 15%;
+	padding-right: 15%;
+	padding-bottom: 3%;
+	padding-top:1px;
 }
-#div2:hover{
-	transform: scale(1.03);
+#heading{
+	text-align: center;
+	position: relative;
+	bottom:20px;
+	font-size: 80px;
+	font-family: 'Montserrat', sans-serif;
 }
-.vertical{
-	border-right: 3px solid grey;
-	height: 200px;
-	position:absolute;
-	left: 50%;
+#subhead{
+	font-family: 'Montserrat', sans-serif;
+	text-align: center;
+	position:relative;
+	top:40px;
+	font-size: 32px;
+	margin-top: -5%;;
 }
-#div3{
-	position:absolute;
-	right:10px;
-	top:20px;
-	font: arial;
-	width:98%;
-	
-}
-#div4{
-	text-align:center;
+#in-content{
+	position:relative;
+	top:40px;
+	font-family: 'Montserrat', sans-serif;
 	font-size:20px;
-	font:Times New Roman;
-	color:#ff9966;
+	text-align: justify;
+	line-height: 150%;
 }
-#div5{
-	font-size:20px;
-	font:Times New Roman;
-	position:absolute;
-	top:300px;
+#devs
+{
+	font-family: 'Montserrat', sans-serif;
+	width: 100%;
+	position: absolute;
+	left:0px;
+	background-image: url(src/assets/connectwork.png);
+	opacity: 0.9;
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-bottom: 3%;
+	color: white;
 
 }
-.bg{
-	
-	background-color: #F0FFF0;
-	height:100%;
-	padding:10px;
-	border-right: 2px solid black;
+#devteam,#mentors{
+	width:50%;
+	text-align: center;
+	font-size: 60px;
+	color: white;
 }
-#div6{
-	font:arial;
-	font-size:20px;
-	color:#ff0066;
+#devteam{
+	float:left;
 }
-#div7{
-	position:absolute;
-	top:0;
-	left:0;
-
+#mentors{
+	float: right;
 }
-#div8{
-	position:absolute;
-	top:0;
+#dev1,#dev2,#prof,#mentor {
+	display: inline-block;
+	width:20%;
+	color: white;
+	/*background-color: white;*/
+	text-align: center;
+	margin-right:5%;
 }
-#div9{
-	position:fixed;
-	height:100%;
-	background-color: #F0FFF0;
-	top:0;
-	right:0;
-	left:1120px;
-	border-left: 2px solid black;
-	padding:5px;
+#name{
+	font-size: 26px;
 }
-#split-left{
-  position: fixed;
-  height:100%;
-  z-index: 1;
-  top: 0;
-  width: 16%;
-  left: 0;
+#dev2{
+	margin-right: 10%;
 }
-#split-right{
-	position:absolute;
-  height:100%;
-  z-index: 1;
-  top: 0;
-  width: 84%;
-  right: 0;
+#mentor{
+	margin-right: 0%;
+}
+#pic{
+	border-radius: 50%;
+    width: 100%;
+	height: auto;
+	margin-bottom: 10%;
+}
+#mail{
+	width:18%;
+	height:auto;
+}
+#fb{
+	width:15%;
+	margin-right:5%;
+	height: auto;
+}
+#weblogo{
+	width:15%;
+	margin-right:5%;
+	height: auto;
+}
+#pdfdisplay{
+	width:62%;
+	float:left;
+	height: 50vh;
+	border: 2px solid #000000 ;
+}
+#actualwork
+{
+	width:100%;
+	background-image: url(src/assets/dot-grid.png);	
+	padding-left: 15%;
+	padding-right: 15%;
+	font-family: 'Montserrat', sans-serif;
 }

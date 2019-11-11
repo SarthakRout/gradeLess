@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'Auto - Grader Project';
   x = 0; 
   y = 0;
-  zoom_to = 0.75;
+  zoom_to = 1;
   pdfSrc:string = null;
   types = ['select-type', 'true/false','single-correct', 'multiple-correct']
   selectedFile:File = null;
