@@ -7,12 +7,15 @@ const cors = require('cors')
 const multer = require('multer');
 
 var index  = 1;
+var index2 = 1;
+var file_to_be_proc
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'upload');
+    cb(null, 'D:/upload');
   },
   filename: function (req, file, cb) {
-    cb(null,   'sheet' + Date.now()  + '.' + file.fieldname);
+  	file_to_be_proc = 'sheet' + Date.now()  + '.' + file.fieldname;
+    cb(null,  file_to_be_proc );
     index= index + 1;
   }
 })
@@ -55,6 +58,7 @@ app.post('/', upload.none(),  (req, res) => {
   write1('xref11: ', formData.xref11);
   write1('yref11: ', formData.yref11);
   write1('type: ', formData.qtype);
+  write1('roll:',formData.roll);
   write2();
   console.log('succesful post');
   res.send({
@@ -65,17 +69,23 @@ app.post('/', upload.none(),  (req, res) => {
 
 function openFile(req, res){
 	const { spawn } = require("child_process");
-var file_to_be_opened = "response.txt";
-var pyProcess = spawn("python", ["proc.py",file_to_be_opened]);
+var file_to_be_opened = 'D:/upload/' + file_to_be_proc;
+var str =index2 + ''
+console.log("python has started working");
+var pyProcess = spawn("python", ["D:/pdf2img.py",file_to_be_opened, str]);
+index2 = index2 + 10;
 
 pyProcess.stdout.setEncoding("utf8");
 pyProcess.stdout.on("data", data => {
-  console.log(JSON.stringify(data));
-  res.send(JSON.stringify(data));
+  console.log(data.toString());
+  res.send({
+  	pyoutput: (JSON.stringify(data)),
+  	status: true,
+  });
 });
-
+console.log("python has stopped");
 }
-app.get('/process', openFile);
+
 app.post('/upload', upload.single('pdf'), (req, res) =>{
 console.log('upload successful');
 res.send({
@@ -83,3 +93,5 @@ res.send({
   	message: 'successful upload',
   });
 });
+
+app.get('/process', openFile);
