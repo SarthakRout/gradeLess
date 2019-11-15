@@ -1,0 +1,126 @@
+
+
+/* You can add global styles to this file, and also import other style files */
+body{
+    font-family: 'Lato', sans-serif;
+    font-size:16px;
+}
+div{
+    box-sizing: border-box;
+}
+#about{
+    width:100%;
+    background-image: url(src/assets/dot-grid.png);
+    padding-left: 15%;
+	padding-right: 15%;
+	padding-bottom: 3%;
+	padding-top:1px;
+}
+#heading{
+	text-align: center;
+	position: relative;
+	bottom:20px;
+	font-size: 80px;
+	font-family: 'Montserrat', sans-serif;
+}
+#subhead{
+	font-family: 'Montserrat', sans-serif;
+	text-align: center;
+	position:relative;
+	top:40px;
+	font-size: 32px;
+	margin-top: -5%;;
+}
+#in-content{
+	position:relative;
+	top:40px;
+	font-family: 'Montserrat', sans-serif;
+	font-size:20px;
+	text-align: justify;
+	line-height: 150%;
+}
+#devs
+{
+	font-family: 'Montserrat', sans-serif;
+	width: 100%;
+	position:absolute;
+	left:0px;
+	background-image: url(src/assets/connectwork.png);
+	opacity: 0.9;
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-bottom: 3%;
+	color: white;
+	top:1300px;
+}
+#devteam,#mentors{
+	width:50%;
+	text-align: center;
+	font-size: 60px;
+	color: white;
+}
+#devteam{
+	float:left;
+}
+#mentors{
+	float: right;
+}
+#dev1,#dev2,#prof,#mentor {
+	display: inline-block;
+	width:20%;
+	color: white;
+	/*background-color: white;*/
+	text-align: center;
+	margin-right:5%;
+}
+#name{
+	font-size: 26px;
+}
+#dev2{
+	margin-right: 10%;
+}
+#mentor{
+	margin-right: 0%;
+}
+#pic{
+	border-radius: 50%;
+    width: 100%;
+	height: auto;
+	margin-bottom: 10%;
+}
+#mail{
+	width:18%;
+	height:auto;
+}
+#fb{
+	width:15%;
+	margin-right:5%;
+	height: auto;
+}
+#weblogo{
+	width:15%;
+	margin-right:5%;
+	height: auto;
+}
+#pdfdisplay{
+	width:100%;
+	float:left;
+	height: 100vh;
+	border: 2px solid #000000 ;
+}
+#actualwork
+{
+	width:100%;
+	background-image: url(src/assets/dot-grid.png);	
+	padding-left: 15%;
+	padding-right: 5%;
+	font-family: 'Montserrat', sans-serif;
+}
+#split-right{
+	float:right;
+	top:250px;
+	right:10px;
+}
+#uploadpdf{
+	float:left;
+}

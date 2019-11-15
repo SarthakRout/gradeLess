@@ -19,7 +19,7 @@ var storage = multer.diskStorage({
     index= index + 1;
   }
 })
-
+app.use(express.static('images'));
 var upload = multer({ storage: storage })
 var bodyParser = require('body-parser');
 
@@ -39,7 +39,7 @@ app.get('/', (req, res) => res.send('Hello World!'));
 app.get('/upload', (req, res) => res.send('Access Restricted: Contact Sarthak Rout'));
 app.listen(port, () => console.log(`Express server listening on port ${port}!`));
 
-var logFile = fs.createWriteStream('response.txt', { flags: 'a' });
+var logFile = fs.createWriteStream('D:/response.txt', { flags: 'a' });
   // Or 'w' to truncate the file every time the process starts.
 var logStdout = process.stdout;
 
@@ -55,10 +55,14 @@ write2 = function(){
 }
 app.post('/', upload.none(),  (req, res) => {
   const formData = req.body;
+  write1('(');
+  write1('roll:',formData.roll);
   write1('xref11: ', formData.xref11);
   write1('yref11: ', formData.yref11);
+  write1('xref21: ', formData.xref21);
+  write1('yref21: ', formData.yref21);
   write1('type: ', formData.qtype);
-  write1('roll:',formData.roll);
+  write1(')');
   write2();
   console.log('succesful post');
   res.send({
@@ -77,10 +81,13 @@ index2 = index2 + 10;
 
 pyProcess.stdout.setEncoding("utf8");
 pyProcess.stdout.on("data", data => {
-  console.log(data.toString());
+  var img = data.toString();
+  var imgAr = img.split('\n');
+  console.log(img);
   res.send({
-  	pyoutput: (JSON.stringify(data)),
   	status: true,
+    length: imgAr.length-1,
+    imgArr: imgAr,
   });
 });
 console.log("python has stopped");

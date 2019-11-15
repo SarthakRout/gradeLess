@@ -3,11 +3,13 @@
 import pdf2image
 from PIL import Image
 import time
+import sys
 
 #DECLARE CONSTANTS
-PDF_PATH = "sheet1573119765853.pdf"
+PDF_PATH = sys.argv[1]
+INDEX = int(sys.argv[2])
 DPI = 200
-OUTPUT_FOLDER = None
+OUTPUT_FOLDER = "D:/images"
 FIRST_PAGE = None
 LAST_PAGE = None
 FORMAT = 'jpg'
@@ -15,6 +17,8 @@ THREAD_COUNT = 1
 USERPWD = None
 USE_CROPBOX = False
 STRICT = False
+
+roll = str(INDEX) + "-" + str(int(time.time())); 
 
 def pdftopil():
     #This method reads a pdf and converts it into a sequence of images
@@ -28,18 +32,21 @@ def pdftopil():
     #userpw parameter allows you to set a password to unlock the converted PDF
     #use_cropbox parameter allows you to use the crop box instead of the media box when converting
     #strict parameter allows you to catch pdftoppm syntax error with a custom type PDFSyntaxError
-
     start_time = time.time()
-    pil_images = pdf2image.convert_from_path(PDF_PATH, dpi=DPI, output_folder=OUTPUT_FOLDER, first_page=FIRST_PAGE, last_page=LAST_PAGE, fmt=FORMAT, thread_count=THREAD_COUNT, userpw=USERPWD, use_cropbox=USE_CROPBOX, strict=STRICT)
-    print ("Time taken : " + str(time.time() - start_time))
+    pil_images = pdf2image.convert_from_path(PDF_PATH, dpi=DPI, output_folder=OUTPUT_FOLDER, first_page=FIRST_PAGE, last_page=LAST_PAGE, fmt=FORMAT, thread_count=THREAD_COUNT, userpw=USERPWD, use_cropbox=USE_CROPBOX, strict=STRICT, output_file=roll)
     return pil_images
     
 def save_images(pil_images):
     #This method helps in converting the images in PIL Image file format to the required image format
     index = 1
+    #filename = roll + "-" + str(index
     for image in pil_images:
-        image.save("page_" + str(index) + ".jpg")
-        index += 1
+        #image.save("page_" + str(index) + ".jpg")
+        filename = roll + "0001-" + str(index)
+        print('http://localhost:3000/' + filename+'.jpg')
+        index = index + 1
+    #print(index-1)
+        
 
 if __name__ == "__main__":
     pil_images = pdftopil()
