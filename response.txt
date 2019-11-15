@@ -1,0 +1,8 @@
+xref11:  0 yref11:  0 type:  true/false 
+xref11:  0 yref11:  0 type:  true/false 
+xref11:  0 yref11:  0 type:  true/false 
+xref11:  0 yref11:  0 type:  true/false 
+( roll: 1 xref11:  482 yref11:  342 xref21:  557 yref21:  535 type:  single-correct ) 
+( roll: 1 xref11:  0 yref11:  0 xref21:  0 yref21:  0 type:  select-type ) 
+( roll: 1 xref11:  311 yref11:  270 xref21:  366 yref21:  327 type:  true/false ) 
+( roll: 1 xref11:  512 yref11:  538 xref21:  404 yref21:  465 type:  true/false ) 
