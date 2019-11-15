@@ -60,12 +60,10 @@ export class AppComponent  {
     //does this -- $img.files[0] work?? Check later.
   }
   showcoord(event){
-  	this.x = event.clientX;
-  	this.y = event.clientY;
-  	console.log("X:" + this.x);
-  	console.log("Y:" + this.y);
-  	console.log("X:" + event.screenX);
-  	console.log("Y:" + event.screenY);
+   	this.x = (event.pageX - document.getElementById("pdfdisplay").offsetLeft);
+  	this.y = (event.pageY - document.getElementById("pdfdisplay").offsetTop);
+    console.log("X:" + (event.pageX - document.getElementById("pdfdisplay").offsetLeft));
+    console.log("Y:" + (event.pageY - document.getElementById("pdfdisplay").offsetTop));
   }
   zoom_in(){
   	this.zoom_to = this.zoom_to + 0.1;
