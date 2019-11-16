@@ -43,6 +43,8 @@ var logFile = fs.createWriteStream('D:/response.txt', { flags: 'a' });
   // Or 'w' to truncate the file every time the process starts.
 var logStdout = process.stdout;
 
+var ocrFile = fs.createWriteStream('D:/coord.txt', {flags: 'a'});
+
 console.log = function () {
   
   logStdout.write(util.format.apply(null, arguments) + '\n');
@@ -50,8 +52,14 @@ console.log = function () {
 write1 = function(){
   logFile.write(util.format.apply(null, arguments) + ' ');
 }
+write11 = function(){
+  ocrFile.write(util.format.apply(null, arguments) + ' ');
+}
 write2 = function(){
 	logFile.write('\n');
+}
+write21 = function(){
+  ocrFile.write('\n');
 }
 app.post('/', upload.none(),  (req, res) => {
   const formData = req.body;
@@ -61,9 +69,17 @@ app.post('/', upload.none(),  (req, res) => {
   write1('yref11: ', formData.yref11);
   write1('xref21: ', formData.xref21);
   write1('yref21: ', formData.yref21);
-  write1('type: ', formData.qtype);
+  write1('ans: ', formData.ans);
   write1(')');
   write2();
+
+  write11(formData.page);
+  write11(((formData.xref11*1653)/700 + 10).toFixed(0));
+  write11(((formData.yref11*2337)/990 + 10).toFixed(0));
+  write11(((formData.xref21*1653)/700 - 10).toFixed(0));
+  write11(((formData.yref21*2337)/990 - 10).toFixed(0));
+  write21();
+
   console.log('succesful post');
   res.send({
   	status: true,
@@ -71,27 +87,83 @@ app.post('/', upload.none(),  (req, res) => {
 
 });
 
+var imgfilename="null";
+var pdflength = 0;
+
 function openFile(req, res){
+
 	const { spawn } = require("child_process");
+
 var file_to_be_opened = 'D:/upload/' + file_to_be_proc;
 var str =index2 + ''
+
 console.log("python has started working");
+
 var pyProcess = spawn("python", ["D:/pdf2img.py",file_to_be_opened, str]);
+
 index2 = index2 + 10;
 
+
+
 pyProcess.stdout.setEncoding("utf8");
+
 pyProcess.stdout.on("data", data => {
+
   var img = data.toString();
+
   var imgAr = img.split('\n');
-  console.log(img);
+
+  pdflength = imgAr.length - 2;
+
+  imgfilename = imgAr[imgAr.length-2]
+
+  console.log(imgfilename);  console.log(img);
+
   res.send({
   	status: true,
-    length: imgAr.length-1,
+
+    length: imgAr.length-2,
+
     imgArr: imgAr,
+
   });
+
 });
+
 console.log("python has stopped");
 }
+
+function startML(req, res){
+
+  const { spawn } = require("child_process");
+
+  var imgindex = 0;
+  if(imgfilename=="null"){
+    res.send({
+
+      status:false,
+
+      message: "No file has been uploaded",
+
+    });
+  }
+  for(imgindex =0; imgindex<pdflength; imgindex++){
+
+    var imgpath = "D:/images/" + imgfilename.substring(0, imgfilename.length -1 );
+
+    console.log(imgpath);
+
+    var pyProcess = spawn("python", ["D:/ocr2.py",imgpath]);
+    pyProcess.stdout.setEncoding("utf8");
+
+    pyProcess.stdout.on("data", data => {
+      console.log(data);
+    });
+
+  }
+  console.log("reached here");
+}
+
 
 app.post('/upload', upload.single('pdf'), (req, res) =>{
 console.log('upload successful');
@@ -102,3 +174,4 @@ res.send({
 });
 
 app.get('/process', openFile);
+app.get('/startml', startML);
