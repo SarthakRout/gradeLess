@@ -1,4 +1,11 @@
-# OCR
+# OCR - gradeLess - ESC101 Advanced Track Project
+## Files used for server-side:
+1. server.js
+2. pdf2img.py
+3. ocr2.py
+4. clean.py
+5. response.txt
+6. coord.txt
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.12.
 
