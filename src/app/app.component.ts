@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent  {
   title = 'Auto - Grader Project';
-  x = 0;
+  x = 0; 
   y = 0;
   zoom_to = 0.75;
   pdfSrc:string = null;
@@ -17,7 +17,7 @@ export class AppComponent  {
   myForm: FormGroup;
   imgArray:string[] = new Array(1);
   imgindex = 0;
-
+  
   constructor(private http: HttpClient){
    this.myForm = new FormGroup({
      xref11: new FormControl(0),
@@ -25,7 +25,9 @@ export class AppComponent  {
     xref21: new FormControl(0),
     yref21: new FormControl(0),
     uid : new FormControl(1),
-
+    ans : new FormControl('-'),
+    page: new FormControl(0)
+   });
    this.imgArray[0]= "http://localhost:3000/default.jpg";
 }
 
@@ -37,7 +39,7 @@ export class AppComponent  {
     console.log("function 1 is called");
     this.myForm.patchValue({xref11:this.x,yref11:this.y});
   }
-
+  
   setRef2(){
     console.log("function 2 is called");
     this.myForm.patchValue({xref21:this.x,yref21:this.y});
@@ -52,7 +54,7 @@ export class AppComponent  {
     reader.readAsArrayBuffer($img.files[0]);
     }*/
     this.selectedFile=<File>event.target.files[0];
-
+    
     //does this -- $img.files[0] work?? Check later.
   }
   showcoord(event){
@@ -61,7 +63,7 @@ export class AppComponent  {
     this.y = (event.pageY - document.getElementById("pdfdisplay").offsetTop);
 
     console.log("X:" + (event.pageX - document.getElementById("pdfdisplay").offsetLeft));
-
+    
     console.log("Y:" + (event.pageY - document.getElementById("pdfdisplay").offsetTop));
   }
   zoom_in(){
@@ -87,8 +89,8 @@ export class AppComponent  {
       res =>{
       console.log(res);
     });
-
-
+   
+    
   }
   cord(event){
     console.log("working");
@@ -102,7 +104,7 @@ export class AppComponent  {
     this.http.post('http://localhost:3000/upload', fd).subscribe(res =>{
       console.log(res);
     });
-
+    
     this.http.get<any>('http://localhost:3000/process').subscribe(
       res =>{
         for(var i = 0; i< res.length; i++){
@@ -127,7 +129,7 @@ export class AppComponent  {
       this.imgindex = this.imgindex  + 1;
     }
     this.show();
-
+    
   }
   prev(){
     if(this.imgindex>0){
@@ -150,5 +152,5 @@ export class AppComponent  {
     document.getElementById('form').style.display='none';
     document.getElementById('eval').style.display='block';
   }
-
+  
 }
