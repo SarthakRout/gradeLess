@@ -19,24 +19,25 @@ export class AppComponent  {
   imgindex = 0;
   
   constructor(private http: HttpClient){
- 	this.myForm = new FormGroup({
- 		xref11: new FormControl(0),
- 		yref11: new FormControl(0),
+   this.myForm = new FormGroup({
+     xref11: new FormControl(0),
+     yref11: new FormControl(0),
     xref21: new FormControl(0),
     yref21: new FormControl(0),
- 		type: new FormControl(this.types[0]),
-    uid : new FormControl(1)
- 	});
+    uid : new FormControl(1),
+    ans : new FormControl('-'),
+    page: new FormControl(0)
+   });
    this.imgArray[0]= "http://localhost:3000/default.jpg";
- }
+}
 
  getSrc(){
    return this.imgArray[this.imgindex];
  }
   setRef1(){
-  	//this.myForm.setValue(xref11:) will not work; set Value requires all fields.
-  	console.log("function 1 is called");
-  	this.myForm.patchValue({xref11:this.x,yref11:this.y});
+    //this.myForm.setValue(xref11:) will not work; set Value requires all fields.
+    console.log("function 1 is called");
+    this.myForm.patchValue({xref11:this.x,yref11:this.y});
   }
   
   setRef2(){
@@ -45,46 +46,45 @@ export class AppComponent  {
   }
   onFileSelected2(event){
   /*let $img: any = document.querySelector('#file');
-
   if (typeof (FileReader) !== 'undefined') {
     let reader = new FileReader();
-
     reader.onload = (event: any) => {
       this.pdfSrc = event.target.result;
     };
-
     reader.readAsArrayBuffer($img.files[0]);
-  	}*/
+    }*/
     this.selectedFile=<File>event.target.files[0];
     
     //does this -- $img.files[0] work?? Check later.
   }
   showcoord(event){
-   	this.x = (event.pageX - document.getElementById("pdfdisplay").offsetLeft);
+     this.x = (event.pageX - document.getElementById("pdfdisplay").offsetLeft);
 
-  	this.y = (event.pageY - document.getElementById("pdfdisplay").offsetTop);
+    this.y = (event.pageY - document.getElementById("pdfdisplay").offsetTop);
 
     console.log("X:" + (event.pageX - document.getElementById("pdfdisplay").offsetLeft));
     
     console.log("Y:" + (event.pageY - document.getElementById("pdfdisplay").offsetTop));
   }
   zoom_in(){
-  	this.zoom_to = this.zoom_to + 0.1;
+    this.zoom_to = this.zoom_to + 0.1;
   }
   zoom_out(){
-  	if(this.zoom_to > 0.5){
-  		this.zoom_to = this.zoom_to - 0.1;
-  	}
+    if(this.zoom_to > 0.5){
+      this.zoom_to = this.zoom_to - 0.1;
+    }
   }
   OnSubmit(){
     console.log("Send button working");
     const fd = new FormData();
+    this.myForm.patchValue({page:this.imgindex});
+    fd.append('page', this.myForm.get('page').value);
     fd.append('xref11', this.myForm.get('xref11').value);
     fd.append('yref11', this.myForm.get('yref11').value);
     fd.append('xref21', this.myForm.get('xref21').value);
     fd.append('yref21', this.myForm.get('yref21').value);
-    fd.append('qtype', this.myForm.get('type').value);
     fd.append('roll', this.myForm.get('uid').value);
+    fd.append('ans',this.myForm.get('ans').value);
     this.http.post('http://localhost:3000', fd).subscribe(
       res =>{
       console.log(res);
@@ -93,9 +93,9 @@ export class AppComponent  {
     
   }
   cord(event){
-  	console.log("working");
-  	console.log("X:" + this.x);
-  	console.log("Y:" + this.y);
+    console.log("working");
+    console.log("X:" + this.x);
+    console.log("Y:" + this.y);
   }
   onUpload(){
     console.log("Upload button working");
@@ -147,6 +147,10 @@ export class AppComponent  {
         console.log("Error: " + err);
       }
     )
+  }
+  Finish(){
+    document.getElementById('form').style.display='none';
+    document.getElementById('eval').style.display='block';
   }
   
 }

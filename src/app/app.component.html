@@ -57,19 +57,11 @@
 		</h4>
 	
 	
-		<div class="row">
-			<div class="col-xs-5">
-				<button type="button" class="btn btn-info" (click) = "zoom_in()"> Zoom In </button>
-			</div>
-			<div class="col-xs-5">
-				<button type="button" class="btn btn-info" (click) = "zoom_out()">Zoom Out </button>
-			</div>
-		</div>
 	
 	
 		&nbsp;&nbsp;
 	
-	
+	<div class="form" id="form">
 		<form [formGroup] = "myForm" class="form-group" novalidate>
 	
 	
@@ -107,14 +99,12 @@
 
 			<div class = "row">
 
-				<div class="col-xs-5">
-				Type: <select formControlName = "type" class="form-control " novalidate>
-					 	<option *ngFor = "let choice of types" [value] = "choice">{{choice}}</option>
-				  	</select>
-				</div>
 			
 				<div class="col-xs-3">
 					Roll: <input formControlName="uid" id = "uid" class="form-control " />
+				</div>
+				<div class="col-xs-3">
+					Answer: <input formControlName="ans" id = "ans" class="form-control " />
 				</div>
 			</div>
 			<div class = "row">
@@ -126,11 +116,18 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-2">
-					<button type="button" class="btn btn-info" (click) = "Evaluate()"> Evaluate</button>
+					<button type="button" class="btn btn-info" (click) = "Finish()"> Finish</button>
 				</div>
 			</div>
 		</form>
-	
+	</div>
+	<div id="eval" style="display: none;">
+	<div class="row">
+		<div class="col-xs-2">
+			<button type="button" class="btn btn-info" (click) = "Evaluate()"> Evaluate</button>
+		</div>
+	</div>
+	</div>
 	</div>
 	
 
@@ -197,4 +194,3 @@
 					</a>
 			</div>
 		</div>
-
