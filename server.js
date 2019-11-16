@@ -39,6 +39,8 @@ app.get('/', (req, res) => res.send('Hello World!'));
 app.get('/upload', (req, res) => res.send('Access Restricted: Contact Sarthak Rout'));
 app.listen(port, () => console.log(`Express server listening on port ${port}!`));
 
+
+
 var logFile = fs.createWriteStream('D:/response.txt', { flags: 'a' });
   // Or 'w' to truncate the file every time the process starts.
 var logStdout = process.stdout;
@@ -134,7 +136,6 @@ console.log("python has stopped");
 }
 
 function startML(req, res){
-
   const { spawn } = require("child_process");
 
   var imgindex = 0;
@@ -147,7 +148,6 @@ function startML(req, res){
 
     });
   }
-  for(imgindex =0; imgindex<pdflength; imgindex++){
 
     var imgpath = "D:/images/" + imgfilename.substring(0, imgfilename.length -1 );
 
@@ -158,9 +158,16 @@ function startML(req, res){
 
     pyProcess.stdout.on("data", data => {
       console.log(data);
-    });
 
-  }
+      ansstr = data.toString();
+
+      ansAr = ansstr.split('\n');
+
+      res.send({
+        AnsAr:ansAr,
+      });
+
+    });
   console.log("reached here");
 }
 
@@ -172,6 +179,14 @@ res.send({
   	message: 'successful upload',
   });
 });
-
+function startapp(req, res){
+  const { spawn } = require("child_process");
+  var pyProcess = spawn("python", ["D:/clean.py"]);
+  res.send({
+    status:true,
+    msg:"cleaned" ,
+  });
+}
 app.get('/process', openFile);
 app.get('/startml', startML);
+app.get('/startapp', startapp);

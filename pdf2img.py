@@ -5,6 +5,7 @@ from PIL import Image
 import time
 import sys
 
+
 #DECLARE CONSTANTS
 PDF_PATH = sys.argv[1]
 INDEX = int(sys.argv[2])
@@ -45,7 +46,7 @@ def save_images(pil_images):
         filename = roll + "0001-" + str(index)
         print('http://localhost:3000/' + filename+'.jpg')
         index = index + 1
-    #print(index-1)
+    print(roll+'0001-')
         
 
 if __name__ == "__main__":

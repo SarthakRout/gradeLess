@@ -31,49 +31,37 @@
 	
 	<div id = "uploadpdf">
 		<div class="row">
-			<div class = "col-xs-6">
+			<div class = "col-xs-4">
 				<input (change)="onFileSelected2($event)" type="file" class="form-control-file" id="file">
 			</div>
-			<div class = "col-xs-5">
+			<div class = "col-xs-3">
 				<button type ="button" (click)="onUpload()">Upload PDF</button>
 			</div>
+		
+			<div class="col-xs-2">
+				<button type="button" class="btn btn-info" (click) = "prev()"> Previous</button>
+			</div>
+			<div class="col-xs-2">
+				<button type="button" class="btn btn-info" (click) = "next()">Next</button>
+			</div>
 		</div>
-
+	</div>
 		<div id="pdfdisplay" (click) = "showcoord($event)" >
-			<img src="{{imgArray[imgindex]}}" id ="show_image" width="500" height="600" alt="No img{{imgArray[imgindex]}}">
-			<!--<script>document.getElementById('image_id_here').setAttribute('src', imgArray[0]);</script>
-	  		<pdf-viewer [src]="pdfSrc" [show-borders]="true" [original-size]="true"[zoom]="zoom_to"></pdf-viewer>
-	  		<img [src] = {{imgArray[imgindex]}} alt ="No Image Found"> -->
+			<img src="{{imgArray[imgindex]}}" id ="show_image" width="700" height="990" alt="No image found. Contact Admin.">
 	  	</div>
 
-	  <div class="row">
-				<div class="col-xs-3">
-					<button type="button" class="btn btn-info" (click) = "prev()"> Previous </button>
-				</div>
-				<div class="col-xs-3">
-					<button type="button" class="btn btn-info" (click) = "next()"> Next </button>
-				</div>
-			</div>
-	</div>
+	  
 	<div id = "split-right">
 		<h4>
 			X : {{x}}     Y : {{y}}
 		</h4>
 	
 	
-		<div class="row">
-			<div class="col-xs-5">
-				<button type="button" class="btn btn-info" (click) = "zoom_in()"> Zoom In </button>
-			</div>
-			<div class="col-xs-5">
-				<button type="button" class="btn btn-info" (click) = "zoom_out()">Zoom Out </button>
-			</div>
-		</div>
 	
 	
 		&nbsp;&nbsp;
 	
-	
+	<div class="form" id="form">
 		<form [formGroup] = "myForm" class="form-group" novalidate>
 	
 	
@@ -111,14 +99,12 @@
 
 			<div class = "row">
 
-				<div class="col-xs-5">
-				Type: <select formControlName = "type" class="form-control " novalidate>
-					 	<option *ngFor = "let choice of types" [value] = "choice">{{choice}}</option>
-				  	</select>
-				</div>
 			
 				<div class="col-xs-3">
 					Roll: <input formControlName="uid" id = "uid" class="form-control " />
+				</div>
+				<div class="col-xs-3">
+					Answer: <input formControlName="ans" id = "ans" class="form-control " />
 				</div>
 			</div>
 			<div class = "row">
@@ -128,10 +114,20 @@
 					</div>
 				</div>
 			</div>
-			
-			
+			<div class="row">
+				<div class="col-xs-2">
+					<button type="button" class="btn btn-info" (click) = "Finish()"> Finish</button>
+				</div>
+			</div>
 		</form>
-	
+	</div>
+	<div id="eval" style="display: none;">
+	<div class="row">
+		<div class="col-xs-2">
+			<button type="button" class="btn btn-info" (click) = "Evaluate()"> Evaluate</button>
+		</div>
+	</div>
+	</div>
 	</div>
 	
 
@@ -187,7 +183,7 @@
 			</div>
 			<div id="mentor">
 					<img id="pic" src="../assets/shailesh.jpg">
-					<p id="name">Shailesh</p>
+					<p id="name">Shailesh Nandkule</p>
 					<p>Masters in Technology<br>Dept. of Computer Science and Engineering
 						<br>IIT Kanpur</p>
 					<a href= "link">
@@ -198,4 +194,3 @@
 					</a>
 			</div>
 		</div>
-

@@ -1,2 +1,5 @@
-( roll: 1 xref11:  118 yref11:  283 xref21:  190 yref21:  315 ans:  T ) 
-( roll: 1 xref11:  118 yref11:  314 xref21:  189 yref21:  345 ans:  F ) 
+( roll: 1 xref11:  118 yref11:  285 xref21:  190 yref21:  315 ans:  T ) 
+( roll: 1 xref11:  117 yref11:  315 xref21:  189 yref21:  345 ans:  F ) 
+( roll: 1 xref11:  117 yref11:  343 xref21:  190 yref21:  377 ans:  T ) 
+( roll: 1 xref11:  116 yref11:  376 xref21:  188 yref21:  408 ans:  T ) 
+( roll: 1 xref11:  116 yref11:  409 xref21:  189 yref21:  442 ans:  F ) 
