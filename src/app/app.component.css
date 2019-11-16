@@ -1,3 +1,5 @@
+
+
 /* You can add global styles to this file, and also import other style files */
 body{
     font-family: 'Lato', sans-serif;
@@ -41,7 +43,7 @@ div{
 {
 	font-family: 'Montserrat', sans-serif;
 	width: 100%;
-	position: absolute;
+	position:absolute;
 	left:0px;
 	background-image: url(src/assets/connectwork.png);
 	opacity: 0.9;
@@ -49,7 +51,7 @@ div{
 	padding-right: 10%;
 	padding-bottom: 3%;
 	color: white;
-
+	top:1600px;
 }
 #devteam,#mentors{
 	width:50%;
@@ -103,14 +105,23 @@ div{
 #pdfdisplay{
 	width:62%;
 	float:left;
-	height: 50vh;
+	height: 170vh;
 	border: 2px solid #000000 ;
 }
 #actualwork
 {
 	width:100%;
 	background-image: url(src/assets/dot-grid.png);	
-	padding-left: 15%;
-	padding-right: 15%;
+	padding-left: 5%;
+	padding-right: 5%;
 	font-family: 'Montserrat', sans-serif;
+}
+#split-right{
+	float:right;
+	position:absolute;
+	top:600px;
+	right:-20px;
+}
+#uploadpdf{
+	float:left;
 }
