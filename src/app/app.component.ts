@@ -24,11 +24,11 @@ export class AppComponent  {
  		yref11: new FormControl(0),
     xref21: new FormControl(0),
     yref21: new FormControl(0),
- 		type: new FormControl(this.types[0]),
-    uid : new FormControl(1)
+    uid : new FormControl(1),
+    ans : new FormControl('-')
  	});
    this.imgArray[0]= "http://localhost:3000/default.jpg";
- }
+}
 
  getSrc(){
    return this.imgArray[this.imgindex];
@@ -83,8 +83,8 @@ export class AppComponent  {
     fd.append('yref11', this.myForm.get('yref11').value);
     fd.append('xref21', this.myForm.get('xref21').value);
     fd.append('yref21', this.myForm.get('yref21').value);
-    fd.append('qtype', this.myForm.get('type').value);
     fd.append('roll', this.myForm.get('uid').value);
+    fd.append('ans',this.myForm.get('ans').value);
     this.http.post('http://localhost:3000', fd).subscribe(
       res =>{
       console.log(res);
@@ -147,6 +147,10 @@ export class AppComponent  {
         console.log("Error: " + err);
       }
     )
+  }
+  Finish(){
+    document.getElementById('form').style.display='none';
+    document.getElementById('eval').style.display='block';
   }
   
 }
