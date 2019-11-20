@@ -121,13 +121,31 @@
 			</div>
 		</form>
 	</div>
+
+	<div id = "results">
 	<div id="eval" style="display: none;">
-	<div class="row">
-		<div class="col-xs-2">
-			<button type="button" class="btn btn-info" (click) = "Evaluate()"> Evaluate</button>
+		<div class="row">
+			<div class="col-xs-2">
+				<button type="button" class="btn btn-info" (click) = "Evaluate()"> Evaluate</button>
+			</div>
 		</div>
 	</div>
+	<div id="score" style="display: none;">
+		<div class="row">
+			<div class="col-xs-2">
+
+				Score : {{score}}
+
+			</div>
+		</div>
+		 <ul>
+    		<li *ngFor="let result of results">
+     			 {{ result }}
+    		</li>
+ 		 </ul>
 	</div>
+	</div>
+
 	</div>
 	
 

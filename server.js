@@ -11,7 +11,7 @@ var index2 = 1;
 var file_to_be_proc
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'D:/upload');
+    cb(null, 'upload');
   },
   filename: function (req, file, cb) {
   	file_to_be_proc = 'sheet' + Date.now()  + '.' + file.fieldname;
@@ -41,11 +41,13 @@ app.listen(port, () => console.log(`Express server listening on port ${port}!`))
 
 
 
-var logFile = fs.createWriteStream('D:/response.txt', { flags: 'a' });
+var logFile = fs.createWriteStream('response.txt', { flags: 'a' });
   // Or 'w' to truncate the file every time the process starts.
 var logStdout = process.stdout;
 
-var ocrFile = fs.createWriteStream('D:/coord.txt', {flags: 'a'});
+var ocrFile = fs.createWriteStream('coord.txt', {flags: 'a'});
+
+var ansFile = fs.createWriteStream('answerkey.txt', {flags: 'a'});
 
 console.log = function () {
   
@@ -62,6 +64,9 @@ write2 = function(){
 }
 write21 = function(){
   ocrFile.write('\n');
+}
+writeans = function(){
+  ansFile.write(util.format.apply(null, arguments) + ' ');
 }
 app.post('/', upload.none(),  (req, res) => {
   const formData = req.body;
@@ -82,6 +87,8 @@ app.post('/', upload.none(),  (req, res) => {
   write11(((formData.yref21*2337)/990 - 10).toFixed(0));
   write21();
 
+  writeans(formData.ans);
+
   console.log('succesful post');
   res.send({
   	status: true,
@@ -96,12 +103,12 @@ function openFile(req, res){
 
 	const { spawn } = require("child_process");
 
-var file_to_be_opened = 'D:/upload/' + file_to_be_proc;
+var file_to_be_opened = 'upload/' + file_to_be_proc;
 var str =index2 + ''
 
 console.log("python has started working");
 
-var pyProcess = spawn("python", ["D:/pdf2img.py",file_to_be_opened, str]);
+var pyProcess = spawn("python", ["pdf2img.py",file_to_be_opened, str]);
 
 index2 = index2 + 10;
 
@@ -149,11 +156,11 @@ function startML(req, res){
     });
   }
 
-    var imgpath = "D:/images/" + imgfilename.substring(0, imgfilename.length -1 );
+    var imgpath = "images/" + imgfilename.substring(0, imgfilename.length -1 );
 
     console.log(imgpath);
 
-    var pyProcess = spawn("python", ["D:/ocr2.py",imgpath]);
+    var pyProcess = spawn("python", ["ocr2.py",imgpath]);
     pyProcess.stdout.setEncoding("utf8");
 
     pyProcess.stdout.on("data", data => {
@@ -165,6 +172,7 @@ function startML(req, res){
 
       res.send({
         AnsAr:ansAr,
+        length: ansAr.length,
       });
 
     });
@@ -181,7 +189,7 @@ res.send({
 });
 function startapp(req, res){
   const { spawn } = require("child_process");
-  var pyProcess = spawn("python", ["D:/clean.py"]);
+  var pyProcess = spawn("python", ["clean.py"]);
   res.send({
     status:true,
     msg:"cleaned" ,

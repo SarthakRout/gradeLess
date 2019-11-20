@@ -10,7 +10,7 @@ import sys
 PDF_PATH = sys.argv[1]
 INDEX = int(sys.argv[2])
 DPI = 200
-OUTPUT_FOLDER = "D:/images"
+OUTPUT_FOLDER = "images"
 FIRST_PAGE = None
 LAST_PAGE = None
 FORMAT = 'jpg'

@@ -85,7 +85,7 @@ div{
 #pic{
 	border-radius: 50%;
     width: 100%;
-	height: auto;
+    height: auto;
 	margin-bottom: 10%;
 }
 #mail{
@@ -117,11 +117,19 @@ div{
 	font-family: 'Montserrat', sans-serif;
 }
 #split-right{
-	float:right;
-	position:absolute;
+	float:left;
 	top:600px;
 	right:-20px;
 }
 #uploadpdf{
-	float:left;
+	position: relative
+}
+#results{
+	position:relative;
+	padding: 10%;
+
+}
+#form{
+	position: relative;
+	padding: 10%;
 }

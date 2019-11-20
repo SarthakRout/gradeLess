@@ -10,13 +10,14 @@ export class AppComponent  {
   title = 'Auto - Grader Project';
   x = 0; 
   y = 0;
-  zoom_to = 0.75;
   pdfSrc:string = null;
   types = ['select-type', 'true/false','single-correct', 'multiple-correct']
   selectedFile:File = null;
   myForm: FormGroup;
   imgArray:string[] = new Array(1);
   imgindex = 0;
+  score = 0;
+  results:string[] = new Array(1);
   
   constructor(private http: HttpClient){
    this.myForm = new FormGroup({
@@ -28,7 +29,8 @@ export class AppComponent  {
     ans : new FormControl('-'),
     page: new FormControl(0)
    });
-   this.imgArray[0]= "http://localhost:3000/default.jpg";
+   this.imgArray[0] = "http://localhost:3000/default.jpg";
+   this.results[0] = "Not Evaluated";
 }
 
  getSrc(){
@@ -54,7 +56,14 @@ export class AppComponent  {
     reader.readAsArrayBuffer($img.files[0]);
     }*/
     this.selectedFile=<File>event.target.files[0];
-    
+    this.http.get('http://localhost:3000/startapp').subscribe(
+      res =>{
+        console.log(res);
+      },
+      err=>{
+        console.log(err);
+      }
+     );
     //does this -- $img.files[0] work?? Check later.
   }
   showcoord(event){
@@ -65,14 +74,6 @@ export class AppComponent  {
     console.log("X:" + (event.pageX - document.getElementById("pdfdisplay").offsetLeft));
     
     console.log("Y:" + (event.pageY - document.getElementById("pdfdisplay").offsetTop));
-  }
-  zoom_in(){
-    this.zoom_to = this.zoom_to + 0.1;
-  }
-  zoom_out(){
-    if(this.zoom_to > 0.5){
-      this.zoom_to = this.zoom_to - 0.1;
-    }
   }
   OnSubmit(){
     console.log("Send button working");
@@ -139,18 +140,23 @@ export class AppComponent  {
   }
   Evaluate(){
     console.log("Evaluate function working");
-    this.http.get('http://localhost:3000/startml').subscribe(
+    this.http.get<any>('http://localhost:3000/startml').subscribe(
       res =>{
+        this.score = res.AnsAr[res.length-2];
+        for(var i = 0; i< res.length-2; i++){
+          this.results[i] = res.AnsAr[i];
+        }
           console.log(res);
       },
       err =>{
-        console.log("Error: " + err);
+        console.log(err);
       }
     )
+    document.getElementById('score').style.display='block';
   }
   Finish(){
     document.getElementById('form').style.display='none';
-    document.getElementById('eval').style.display='block';
+    document.getElementById('eval').style.display='inline-block';
   }
   
 }
