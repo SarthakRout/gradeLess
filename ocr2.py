@@ -21,7 +21,9 @@ def take_question(imPath):
     xref21 = coord[3]
     yref21 = coord[4]
     evalans = ml(xref21, xref11, yref11, yref21, imPathnew)
-    print('Answer Key :' + ansar[q] + ' Evaluated Answer: ' + evalans)
+    if evalans != "T" || evalans != "F" :
+      evalans = "To be Checked Manually"
+    print('Key :' + ansar[q] + ' Evaluated Answer: ' + evalans)
     if ansar[q] == evalans:
         score = score + 1
     q = q + 1

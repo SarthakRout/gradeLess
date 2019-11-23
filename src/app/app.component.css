@@ -47,11 +47,11 @@ div{
 	left:0px;
 	background-image: url(src/assets/connectwork.png);
 	opacity: 0.9;
-	padding-left: 10%;
-	padding-right: 10%;
+	padding-left: 7%;
+	padding-right: 7%;
 	padding-bottom: 3%;
 	color: white;
-	top:1600px;
+	top:1630px;
 }
 #devteam,#mentors{
 	width:50%;
@@ -77,10 +77,13 @@ div{
 	font-size: 26px;
 }
 #dev2{
-	margin-right: 10%;
+	margin-right: 7%;
+}
+#prof{
+	margin-right:0%;
 }
 #mentor{
-	margin-right: 0%;
+	margin-left: 3%;
 }
 #pic{
 	border-radius: 50%;
@@ -103,7 +106,7 @@ div{
 	height: auto;
 }
 #pdfdisplay{
-	width:62%;
+	width:65%;
 	float:left;
 	height: 170vh;
 	border: 2px solid #000000 ;
@@ -112,14 +115,16 @@ div{
 {
 	width:100%;
 	background-image: url(src/assets/dot-grid.png);	
-	padding-left: 5%;
+	padding-left: 2%;
 	padding-right: 5%;
 	font-family: 'Montserrat', sans-serif;
 }
 #split-right{
-	float:left;
-	top:600px;
+	position:absolute;
+	float:right;
+	top:570px;
 	right:-20px;
+	padding:1%;
 }
 #uploadpdf{
 	position: relative
@@ -131,5 +136,9 @@ div{
 }
 #form{
 	position: relative;
-	padding: 10%;
+	padding: 0%;
+}
+.btn{
+	margin-top: 10px;
+	margin-left: 5px;
 }

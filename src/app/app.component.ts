@@ -18,6 +18,7 @@ export class AppComponent  {
   imgindex = 0;
   score = 0;
   results:string[] = new Array(1);
+  qno = 0;
   
   constructor(private http: HttpClient){
    this.myForm = new FormGroup({
@@ -142,7 +143,8 @@ export class AppComponent  {
     console.log("Evaluate function working");
     this.http.get<any>('http://localhost:3000/startml').subscribe(
       res =>{
-        this.score = res.AnsAr[res.length-2];
+        this.score = res.AnsAr[res.length-2] ;
+        this.qno = (res.length - 2 );
         for(var i = 0; i< res.length-2; i++){
           this.results[i] = res.AnsAr[i];
         }

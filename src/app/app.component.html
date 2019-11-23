@@ -1,214 +1,211 @@
 <div id ="about">
-		<p id="heading">gradeLess</p>
-		<div id="subhead">
-			<p id="tag"><i>An Effortless Grading Solution</i></p>
-		</div>
-		<p id="in-content">	
-			This project is a part of the course <b>ESC101 : Fundamentals 
-			of Computing</b> at
-			<b>Indian Institute of Technology , Kanpur</b>.
-			<br>
-				gradeLess is an intelligent tool designed to evaluate 
-				hand-written 
-				answer copies using 
-				Machine Learning for Character Recognition effortlessly to save
-				the precious time of instructors and tutors grading answers manually.<br>
-				Currently we support questions with binary answers (True / False) , we
-				plan to extend full support for Multiple Choice Questions .<br>
-				The Frontend is designed using CSS and JS (for the beauty part) and 
-				Angular 8 for most of the actual work ,that is evaluation of answer copies.<br>
-				The backend is developed using Express.js and it is middleware between our Frontend and Python program
-				which uses OpenCV for image processing and employs 
-				Machine Learning Algorithms for correctly evaluating the answers.
-				Recommended Use in full-screen mode in Google Chrome.
-		</p>
+	<p id="heading">gradeLess</p>
+
+	<div id="subhead">
+		<p id="tag"><i>An Effortless Grading Solution</i></p>
 	</div>
+	<p id="in-content">	
+		This project is a part of the course <b>ESC101 : Fundamentals 
+		of Computing</b> at
+		<b>Indian Institute of Technology , Kanpur</b>.
+		<br>
+		gradeLess is an intelligent tool designed to evaluate 
+		hand-written 
+		answer copies using 
+		Machine Learning for Character Recognition effortlessly to save
+		the precious time of instructors and tutors grading answers manually.<br>
+		Currently we support questions with binary answers (True / False) , we
+		plan to extend full support for Multiple Choice Questions .<br>
+		The Frontend is designed using CSS and JS (for the beauty part) and 
+		Angular 8 for most of the actual work ,that is evaluation of answer copies.<br>
+		The backend is developed using Express.js and it is middleware between our Frontend and Python program
+		which uses OpenCV for image processing and employs 
+		Machine Learning Algorithms for correctly evaluating the answers.
+		Recommended Use in full-screen mode in Google Chrome.
+	</p>
+</div>
 
 <div id="actualwork">
+
 	<div id = "coord_display"  
 		(dragstart) = "cord($event)" draggable = "false">
 	</div>
 	
 	<div id = "uploadpdf">
 		<div class="row">
+
 			<div class = "col-xs-4">
-				<input (change)="onFileSelected2($event)" type="file" class="form-control-file" id="file">
+				<input (change)="onFileSelected2($event)" type="file" class="btn btn-outline-secondary form-control-file" id="file">
 			</div>
 			<div class = "col-xs-3">
-				<button type ="button" (click)="onUpload()">Upload PDF</button>
+				<button type ="button" class = "btn btn-info" (click)="onUpload()">Upload PDF</button> 
+				&emsp;
+				<button type ="button" class = "btn btn-info" (click) = "prev()"> Previous</button>
+				<button type ="button" class = "btn btn-info" (click) = "next()">Next</button>
 			</div>
-		
-			<div class="col-xs-2">
-				<button type="button" class="btn btn-info" (click) = "prev()"> Previous</button>
-			</div>
-			<div class="col-xs-2">
-				<button type="button" class="btn btn-info" (click) = "next()">Next</button>
-			</div>
+
 		</div>
 	</div>
-		<div id="pdfdisplay" (click) = "showcoord($event)" >
-			<img src="{{imgArray[imgindex]}}" id ="show_image" width="700" height="990" alt="No image found. Contact Admin.">
-	  	</div>
+
+	<div id="pdfdisplay" (click) = "showcoord($event)" >
+
+		<img src="{{imgArray[imgindex]}}" id ="show_image" width="700" height="990" alt="No image found. Contact Admin.">
+
+	</div>
 
 	  
 	<div id = "split-right">
-		<h4>
-			X : {{x}}     Y : {{y}}
-		</h4>
-	
-	
-	
-	
-		&nbsp;&nbsp;
-	
-	<div class="form" id="form">
-		<form [formGroup] = "myForm" class="form-group" novalidate>
-	
-	
-			<div class="row">
-				<div class="col-xs-3">
-					Xref11: <input formControlName="xref11" id = "xref11" class="form-control" /> 
-				</div>
-				<div class="col-xs-3">
-					Yref11: <input formControlName="yref11" id = "yref11" class="form-control " />
-				</div>
-			</div>
+		<div class ="row">
+			<h4>X : {{x}}     Y : {{y}}</h4>
+		</div>
+		
+		<div class="form" id="form">
+			<form [formGroup] = "myForm" class="form-group" novalidate>
 
-			<div class = "row">
-				
+				<div class="row">
+					<div class="col-xs-3">
+						TopLeftX: <input formControlName="xref11" id = "xref11" class="form-control" /> 
+					</div>
+					<div class="col-xs-3">
+						TopLeftY: <input formControlName="yref11" id = "yref11" class="form-control " />
+					</div>
+				</div>
+
+				<div class = "row">
 					<button type = "button" (click) =  "setRef1()" class="btn btn-primary btn-sm"> Set Reference 1 </button> <br>
-				
-			</div>
-
-			<div class="row">
-				<div class="col-xs-3">
-					Xref21: <input formControlName="xref21" id = "xref21" class="form-control" /> 
 				</div>
-				<div class="col-xs-3">
-					Yref21: <input formControlName="yref21" id = "yref21" class="form-control " />
-				</div>
-			</div>
 
-	
-	
-			<div class = "row">
+				<div class="row">
+					<div class="col-xs-3">
+						BotRightX: <input formControlName="xref21" id = "xref21" class="form-control" /> 
+					</div>
+					<div class="col-xs-3">
+						BotRightY: <input formControlName="yref21" id = "yref21" class="form-control " />
+					</div>
+				</div>
+
+				<div class = "row">
 				
 					<button type = "button" (click) =  "setRef2()" class="btn btn-primary btn-sm"> Set Reference 2 </button> <br>
 				
-			</div>
-
-			<div class = "row">
-
-			
-				<div class="col-xs-3">
-					Roll: <input formControlName="uid" id = "uid" class="form-control " />
 				</div>
-				<div class="col-xs-3">
-					Answer: <input formControlName="ans" id = "ans" class="form-control " />
+				<div class = "row">
+
+					<div class="col-xs-3">
+						Roll: <input formControlName="uid" id = "uid" class="form-control " />
+					</div>
+					<div class="col-xs-3">
+						Key: <input formControlName="ans" id = "ans" class="form-control " />
+					</div>
 				</div>
-			</div>
-			<div class = "row">
-				<div class="col-xs-3">
-					<div class="text-center">
-						<button type = "submit" class="btn btn-primary" (click) = "OnSubmit()"> Send </button> 
+
+				<div class = "row">
+					<div class="col-xs-3">
+						<div class="text-center">
+							<button type = "submit" class="btn btn-primary" (click) = "OnSubmit()"> Send </button> 
+						</div>
+					</div>
+					&emsp;
+					<div class="col-xs-2">
+						<button type="button" class="btn btn-info" (click) = "Finish()"> Finish</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div id = "results">
+
+			<div id="eval" style="display: none;">
+				<div class="row">
+					<div class="col-xs-2">
+						<button type="button" class="btn btn-info" (click) = "Evaluate()"> Evaluate</button>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-xs-2">
-					<button type="button" class="btn btn-info" (click) = "Finish()"> Finish</button>
+
+			<div id="score" style="display: none;">
+
+				<div class="row">
+					<div class="col">
+						Score : {{score}} out of {{qno}}
+					</div>
 				</div>
-			</div>
-		</form>
-	</div>
 
-	<div id = "results">
-	<div id="eval" style="display: none;">
-		<div class="row">
-			<div class="col-xs-2">
-				<button type="button" class="btn btn-info" (click) = "Evaluate()"> Evaluate</button>
+			 	<ul>
+    				<li *ngFor="let result of results"> {{ result }} </li>
+ 				</ul>
 			</div>
 		</div>
-	</div>
-	<div id="score" style="display: none;">
-		<div class="row">
-			<div class="col-xs-2">
-
-				Score : {{score}}
-
-			</div>
-		</div>
-		 <ul>
-    		<li *ngFor="let result of results">
-     			 {{ result }}
-    		</li>
- 		 </ul>
-	</div>
-	</div>
-
 	</div>
 	
 
-		<div id="devs">
-			<div id="headdev"><p id="devteam">Developers</p>
-				<p id="mentors">Mentors</p></div>
-				
-				<div id="dev1">
-						<img id="pic" src="../assets/sarthak.jpg">
-						<p id="name">Sarthak Rout</p>
-						<p>Bachelor of Technology<br>
-							Dept. of Computer Science and Engineering
-							<br>IIT Kanpur</p>
-						
-						<a href= "http://home.iitk.ac.in/~sarthakr">
-							<img id="weblogo" src="../assets/weblogo.svg">
-						</a>
-						<a href= "fblink">
-							<img id="fb" src="../assets/fb.svg">
-						</a>
-						<a href="mailto:sarthakr@iitk.ac.in">
-							<img id="mail" src="../assets/maillogo.svg">
-						</a>
-					</div>
-					<div id="dev2">
-							<img id="pic" src="../assets/naman.jpg">
-							<p id="name">Naman Gupta</p>
-							<p>Bachelor of Technology<br>
-								Dept. of Computer Science and Engineering
-								<br>IIT Kanpur</p>
-							<a href= "http://home.iitk.ac.in/~namangup">
-								<img id="weblogo" src="../assets/weblogo.svg">
-							</a>
-							<a href= "fblink">
-								<img id="fb" src="../assets/fb.svg">
-							</a>
-							<a href="mailto:namangup@iitk.ac.in">
-								<img id="mail" src="../assets/maillogo.svg">
-							</a>
-						</div>
-			
-			<div id="prof">
-					<img id="pic" src="../assets/piyush.jpg">
-					<p id="name">Dr. Piyush Rai</p>
-					<p>Assistant Professor<br>Dept. of Computer Science and Engineering
-						<br>IIT Kanpur</p>
-					<a href= "link">
-						<img id="weblogo" src="../assets/weblogo.svg">
-					</a>
-					<a href="mailto">
-						<img id="mail" src="../assets/maillogo.svg">
-					</a>
-			</div>
-			<div id="mentor">
-					<img id="pic" src="../assets/shailesh.jpg">
-					<p id="name">Shailesh Nandkule</p>
-					<p>Masters in Technology<br>Dept. of Computer Science and Engineering
-						<br>IIT Kanpur</p>
-					<a href= "link">
-						<img id="weblogo" src="../assets/weblogo.svg">
-					</a>
-					<a href="mailto">
-						<img id="mail" src="../assets/maillogo.svg">
-					</a>
-			</div>
+	<div id="devs">
+
+		<div id="headdev">
+			<p id="devteam">Developers</p>
+			<p id="mentors">Mentors</p>
 		</div>
+
+		<div id="dev1">
+			<img id="pic" src="../assets/sarthak.jpg">
+			<p id="name">Sarthak Rout</p>
+			<p>Bachelor of Technology<br>
+			Dept. of Computer Science and Engineering
+			<br>IIT Kanpur</p>
+
+			<a href= "http://home.iitk.ac.in/~sarthakr">
+				<img id="weblogo" src="../assets/weblogo.svg">
+			</a>
+			<a href= "fblink">
+				<img id="fb" src="../assets/fb.svg">
+			</a>
+			<a href="mailto:sarthakr@iitk.ac.in">
+				<img id="mail" src="../assets/maillogo.svg">
+			</a>
+		</div>
+
+		<div id="dev2">
+			<img id="pic" src="../assets/naman.jpg">
+			<p id="name">Naman Gupta</p>
+			<p>Bachelor of Technology<br>
+			Dept. of Computer Science and Engineering
+			<br>IIT Kanpur</p>
+			<a href= "http://home.iitk.ac.in/~namangup">
+				<img id="weblogo" src="../assets/weblogo.svg">
+			</a>
+			<a href= "fblink">
+				<img id="fb" src="../assets/fb.svg">
+			</a>
+			<a href="mailto:namangup@iitk.ac.in">
+				<img id="mail" src="../assets/maillogo.svg">
+			</a>
+		</div>
+			
+		<div id="prof">
+			<img id="pic" src="../assets/piyush.jpg">
+			<p id="name">Dr. Piyush Rai</p>
+			<p>Assistant Professor<br>Dept. of Computer Science and Engineering
+			<br>IIT Kanpur</p>
+			<a href= "link">
+				<img id="weblogo" src="../assets/weblogo.svg">
+			</a>
+			<a href="mailto">
+				<img id="mail" src="../assets/maillogo.svg">
+			</a>
+		</div>
+
+		<div id="mentor">
+			<img id="pic" src="../assets/shailesh.jpg">
+			<p id="name">Shailesh Nandkule</p>
+			<p>Masters in Technology<br>Dept. of Computer Science and Engineering
+			<br>IIT Kanpur</p>
+			<a href= "link">
+				<img id="weblogo" src="../assets/weblogo.svg">
+			</a>
+			<a href="mailto">
+				<img id="mail" src="../assets/maillogo.svg">
+			</a>
+		</div>
+	</div>
+</div>
+
