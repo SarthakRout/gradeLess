@@ -130,9 +130,9 @@ div{
 	position: relative
 }
 #results{
-	position:relative;
-	padding: 10%;
-
+	position:absolute;
+	right:300px;
+	padding: 0%;
 }
 #form{
 	position: relative;
@@ -141,4 +141,8 @@ div{
 .btn{
 	margin-top: 10px;
 	margin-left: 5px;
+}
+#list{
+	display: inline-block;
+	min-width: 175px;
 }

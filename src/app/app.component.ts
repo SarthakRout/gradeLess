@@ -11,7 +11,7 @@ export class AppComponent  {
   x = 0; 
   y = 0;
   pdfSrc:string = null;
-  types = ['select-type', 'true/false','single-correct', 'multiple-correct']
+  types = ['select-type', 'true/false', 'MCQ']
   selectedFile:File = null;
   myForm: FormGroup;
   imgArray:string[] = new Array(1);
@@ -19,6 +19,7 @@ export class AppComponent  {
   score = 0;
   results:string[] = new Array(1);
   qno = 0;
+  i = 0;
   
   constructor(private http: HttpClient){
    this.myForm = new FormGroup({
@@ -28,7 +29,8 @@ export class AppComponent  {
     yref21: new FormControl(0),
     uid : new FormControl(1),
     ans : new FormControl('-'),
-    page: new FormControl(0)
+    page: new FormControl(0),
+    qtype: new FormControl(this.types[0])
    });
    this.imgArray[0] = "http://localhost:3000/default.jpg";
    this.results[0] = "Not Evaluated";
@@ -76,7 +78,7 @@ export class AppComponent  {
     
     console.log("Y:" + (event.pageY - document.getElementById("pdfdisplay").offsetTop));
   }
-  OnSubmit(){
+  OnSend(){
     console.log("Send button working");
     const fd = new FormData();
     this.myForm.patchValue({page:this.imgindex});
@@ -87,6 +89,7 @@ export class AppComponent  {
     fd.append('yref21', this.myForm.get('yref21').value);
     fd.append('roll', this.myForm.get('uid').value);
     fd.append('ans',this.myForm.get('ans').value);
+    fd.append('qtype', this.myForm.get('qtype').value);
     this.http.post('http://localhost:3000', fd).subscribe(
       res =>{
       console.log(res);
@@ -154,11 +157,26 @@ export class AppComponent  {
         console.log(err);
       }
     )
-    document.getElementById('score').style.display='block';
+    document.getElementById('score').style.display='inline-block';
   }
   Finish(){
-    document.getElementById('form').style.display='none';
+    document.getElementById('split-right').style.display='none';
     document.getElementById('eval').style.display='inline-block';
+    document.getElementById('pdfdisplay').style.display='none';
   }
-  
+ onFileSelectedMultiple(){
+   var payload  = new FormData;
+   
+    if (files.length > 0) {
+     for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    console.log(file)
+                    console.log(files.length)
+                    payload.append('image', file);
+                }
+            }
+ }
+ OnUploadMultiple(){
+
+ }
 }

@@ -100,9 +100,19 @@
 				</div>
 
 				<div class = "row">
+					<div class="col-xs-2">	Type: 
+						<select formControlName = "qtype" (change) = "typechange($event)" novalidate>
+							<option *ngFor = "let choice of types" [value] = "choice">
+								{{choice}}
+							</option>
+						</select>
+					</div>
+				</div>
+
+				<div class = "row">
 					<div class="col-xs-3">
 						<div class="text-center">
-							<button type = "submit" class="btn btn-primary" (click) = "OnSubmit()"> Send </button> 
+							<button type = "submit" class="btn btn-primary" (click) = "OnSend()"> Send </button> 
 						</div>
 					</div>
 					&emsp;
@@ -112,33 +122,45 @@
 				</div>
 			</form>
 		</div>
+	</div>
 
-		<div id = "results">
+	<div id = "results">
 
 			<div id="eval" style="display: none;">
 				<div class="row">
+
 					<div class="col-xs-2">
+						<input (change)="onFileSelectedMultiple($event)" type="file" class="btn btn-outline-secondary form-control-file" id="file2" multiple>
+					</div>
+				</div>
+				<div class ="row">
+					<div class="col-xs-3">
+						<button type ="button" class = "btn btn-info" (click)="onUploadMultiple()">Upload Multiple PDF</button> 
+					</div>
+				</div>
+				<div class="row">
+					<div class = "col-xs-3">
 						<button type="button" class="btn btn-info" (click) = "Evaluate()"> Evaluate</button>
 					</div>
+
 				</div>
 			</div>
 
 			<div id="score" style="display: none;">
 
-				<div class="row">
-					<div class="col">
-						Score : {{score}} out of {{qno}}
-					</div>
-				</div>
-
-			 	<ul>
-    				<li *ngFor="let result of results"> {{ result }} </li>
- 				</ul>
+			<div class="row">
+				Score : {{score}} out of {{qno}}
 			</div>
+
+			 <ul>
+			 	<div class = "row" id = "list">
+			 			
+			 		<li *ngFor="let result of results"> {{ result }} </li>
+			 			
+			 	</div>
+ 			</ul>
 		</div>
 	</div>
-	
-
 	<div id="devs">
 
 		<div id="headdev">

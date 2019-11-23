@@ -9,6 +9,9 @@ const multer = require('multer');
 var index  = 1;
 var index2 = 1;
 var file_to_be_proc
+
+
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'upload');
@@ -19,8 +22,21 @@ var storage = multer.diskStorage({
     index= index + 1;
   }
 })
+var storageb = multer.diskStorage({
+  destination: function(req, files, cb){
+    cb(null, 'upload');
+  },
+  filename: function (req, files, cb){
+    file_to_be_proc = 'sheet' + Date.now()  + '.' + file.fieldname;
+    cb(null,  file_to_be_proc );
+  }
+})
 app.use(express.static('images'));
 var upload = multer({ storage: storage })
+
+
+var uploadb = multer({ storage:storageb })
+
 var bodyParser = require('body-parser');
 
 var fs = require('fs');
@@ -77,6 +93,7 @@ app.post('/', upload.none(),  (req, res) => {
   write1('xref21: ', formData.xref21);
   write1('yref21: ', formData.yref21);
   write1('ans: ', formData.ans);
+  write1('qtype: ', formData.qtype);
   write1(')');
   write2();
 
@@ -85,6 +102,7 @@ app.post('/', upload.none(),  (req, res) => {
   write11(((formData.yref11*2337)/990 + 10).toFixed(0));
   write11(((formData.xref21*1653)/700 - 10).toFixed(0));
   write11(((formData.yref21*2337)/990 - 10).toFixed(0));
+  write11(formData.qtype);
   write21();
 
   writeans(formData.ans);
@@ -174,7 +192,7 @@ function startML(req, res){
         AnsAr:ansAr,
         length: ansAr.length,
       });
-
+      console.log("ML Complete");
     });
   console.log("reached here");
 }
@@ -195,6 +213,13 @@ function startapp(req, res){
     msg:"cleaned" ,
   });
 }
+app.post('/uploadmultiple', upload.array('pdf'), (req, res)=>{
+  console.log("bulk upload successful");
+  res.send({
+    status:true,
+    msg:"bulk upload successful",
+  });
+});
 app.get('/process', openFile);
 app.get('/startml', startML);
 app.get('/startapp', startapp);
