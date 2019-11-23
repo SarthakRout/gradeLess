@@ -6,6 +6,7 @@
 4. clean.py
 5. response.txt
 6. coord.txt
+6. answerkey.txt
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.12.
 
