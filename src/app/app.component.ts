@@ -163,6 +163,8 @@ export class AppComponent  {
     document.getElementById('split-right').style.display='none';
     document.getElementById('eval').style.display='inline-block';
     document.getElementById('pdfdisplay').style.display='none';
+    document.getElementById('devs').style.position='relative';
+    document.getElementById('devs').style.top='50%';
   }
  onFileSelectedMultiple(){
    var payload  = new FormData;
