@@ -3,7 +3,8 @@
 /* You can add global styles to this file, and also import other style files */
 body{
     font-family: 'Lato', sans-serif;
-    font-size:16px;
+	font-size:16px;
+	background-image: url(src/assets/connectwork.png);
 }
 div{
     box-sizing: border-box;
@@ -105,44 +106,132 @@ div{
 	margin-right:5%;
 	height: auto;
 }
-#pdfdisplay{
-	width:65%;
-	float:left;
-	height: 170vh;
-	border: 2px solid #000000 ;
-}
 #actualwork
 {
 	width:100%;
+	height: auto;
+	overflow: auto;
 	background-image: url(src/assets/dot-grid.png);	
-	padding-left: 2%;
-	padding-right: 5%;
+	padding-left: 15%;
+	padding-right: 10%;
+	padding-bottom: 20%;
 	font-family: 'Montserrat', sans-serif;
 }
+#pdfdisplay{
+	width:800px;	
+	float:left;
+	margin-top: 2%;
+	height: 990px;
+	border: 5px solid #000000 ;
+	background-color: #ffffff;
+}
+#uploadbtn{
+	position: relative;
+	right:30%;
+}
 #split-right{
-	position:absolute;
-	float:right;
-	top:570px;
-	right:-20px;
-	padding:1%;
+	position: relative;
+	float: right;
+	right:2%;
+	margin-top:5%;
 }
 #uploadpdf{
-	position: relative
+	position: relative;
+	margin-top:2%;
+	float:right;
+	right:10%;
+	height: auto;
 }
 #results{
 	position:absolute;
-	right:300px;
 	padding: 0%;
 }
 #form{
 	position: relative;
 	padding: 0%;
 }
-.btn{
-	margin-top: 10px;
-	margin-left: 5px;
-}
+
 #list{
 	display: inline-block;
 	min-width: 175px;
 }
+.custom-file-input {
+	color: transparent;
+  }
+  .custom-file-input::-webkit-file-upload-button {
+	visibility: hidden;
+  }
+  .custom-file-input::before {
+	content: 'Choose File';
+	color: black;
+	display: inline-block;
+	background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+	border: 1px solid #999;
+	border-radius: 3px;
+	padding: 5px 8px;
+	margin-right: 50px;
+	outline: none;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	cursor: pointer;
+	text-shadow: 1px 1px #fff;
+	font-weight: 700;
+	font-size: 10pt;
+  }
+  .custom-file-input:hover::before {
+	border-color: black;
+  }
+  .custom-file-input:active {
+	outline: 0;
+  }
+  .custom-file-input:active::before {
+	background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+  }
+  #xref11,#xref21,#yref11,#yref21{
+	  position: relative;
+	  top:5px;
+  }
+  #right{
+	  margin-left:15%;
+  }
+  #ref{
+	  position: relative;
+	  margin-top:13%;
+	  left:10%;
+  }
+  .btn{
+	  background-color: rgb(54, 54, 54);
+	  color:white;
+	  border: none;
+  }
+  .box{
+	  position: relative;
+  }
+  .box select {
+	background-color:  rgb(54, 54, 54);
+	color: white;
+	padding: 12px;
+	width: 100px;
+	border: none;
+	font-size: 16px;
+	box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+	-webkit-appearance: button;
+	appearance: button;
+	outline: none;
+  }
+  .box select option {
+	padding: 30px;
+  }
+  #sendfinish{
+	  font-size: 24px;
+	  padding: 10px;
+	  position: relative;
+	  margin-top:20%;
+	  margin-left:20%;
+  }
+  #finish{
+	  margin-left:10%;
+  }
+  #next{
+	  margin-left:17%;
+  }
