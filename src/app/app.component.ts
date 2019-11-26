@@ -158,6 +158,7 @@ export class AppComponent  {
     }
     this.show();
   }
+
   Finish(){
     document.getElementById('split-right').style.display='none';
     document.getElementById('uploadpdf').style.display='none';
