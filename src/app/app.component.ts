@@ -83,6 +83,7 @@ export class AppComponent  {
   }
   OnSend(){
     console.log("Send button working");
+    this.qno = this.qno + 1;
     const fd = new FormData();
     this.myForm.patchValue({page:this.imgindex});
     fd.append('page', this.myForm.get('page').value);
@@ -157,24 +158,10 @@ export class AppComponent  {
     }
     this.show();
   }
-  /*Evaluate(){
-    console.log("Evaluate function working");
-    this.http.get<any>('http://localhost:3000/startml').subscribe(
-      res =>{
-        this.score = res.AnsAr[res.length-2] ;
-        this.qno = (res.length - 2 );
-        for(var i = 0; i< res.length-2; i++){
-          this.results[i] = res.AnsAr[i];
-        }
-          console.log(res);
-      },
-      err =>{
-        console.log(err);
-      }
-    );
-  }*/
+
   Finish(){
     document.getElementById('split-right').style.display='none';
+    document.getElementById('uploadpdf').style.display='none';
     document.getElementById('eval').style.display='inline-block';
     document.getElementById('pdfdisplay').style.display='none';
     document.getElementById('devs').style.position='relative';
@@ -230,6 +217,9 @@ export class AppComponent  {
  Align(){
    this.http.get<any>('http://localhost:3000/align').subscribe(
       res =>{
+        if(res.status==true){
+          document.getElementById('final').style.display='inline-block';
+        }
         console.log(res);
       });
  }
