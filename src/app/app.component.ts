@@ -20,11 +20,13 @@ export class AppComponent  {
   results:string[] = new Array(1);
   qno = 0;
   i = 0;
+  bulkSelectedFiles:File[] = null;
+  newresults:string[][] = new Array(1);
   
   constructor(private http: HttpClient){
    this.myForm = new FormGroup({
-     xref11: new FormControl(0),
-     yref11: new FormControl(0),
+    xref11: new FormControl(0),
+    yref11: new FormControl(0),
     xref21: new FormControl(0),
     yref21: new FormControl(0),
     uid : new FormControl(1),
@@ -32,8 +34,9 @@ export class AppComponent  {
     page: new FormControl(0),
     qtype: new FormControl(this.types[0])
    });
-   this.imgArray[0] = "http://localhost:3000/default.jpg";
+   this.imgArray[0] = "../assets/default.jpg";
    this.results[0] = "Not Evaluated";
+   this.newresults = [["NA"]];
 }
 
  getSrc(){
@@ -80,6 +83,7 @@ export class AppComponent  {
   }
   OnSend(){
     console.log("Send button working");
+    this.qno = this.qno + 1;
     const fd = new FormData();
     this.myForm.patchValue({page:this.imgindex});
     fd.append('page', this.myForm.get('page').value);
@@ -106,23 +110,35 @@ export class AppComponent  {
     console.log("Upload button working");
     const fd = new FormData();
     fd.append('pdf', this.selectedFile, this.selectedFile.name);
-    this.http.post('http://localhost:3000/upload', fd).subscribe(res =>{
-      console.log(res);
-    });
-    
-    this.http.get<any>('http://localhost:3000/process').subscribe(
+    this.http.get<any>('http://localhost:3000/setdate').subscribe( 
       res =>{
-        for(var i = 0; i< res.length; i++){
-          this.imgArray[i] = res.imgArr[i];
+        if( res.status==true){
+
+          this.http.post<any>('http://localhost:3000/upload', fd).subscribe(res =>{
+            console.log(res);
+
+            if(res.status == true){
+              this.http.get<any>('http://localhost:3000/process').subscribe(
+                res =>{
+                  for(var i = 0; i< res.length; i++){
+                  this.imgArray[i] = res.imgArr[i];
+                   }
+                   console.log(res);
+                   //console.log(this.imgArray);
+                  this.show();
+                },
+                err=>{
+                  console.log(err);
+                });
+             }
+
+          });
+
         }
-        console.log(res);
-        //console.log(this.imgArray);
-        this.show();
-        },
-      err=>{
-        console.log(err);
-      }
-      );
+      });
+    
+    
+    
   }
   currimg : any="";
   show(){
@@ -142,43 +158,68 @@ export class AppComponent  {
     }
     this.show();
   }
-  Evaluate(){
-    console.log("Evaluate function working");
-    this.http.get<any>('http://localhost:3000/startml').subscribe(
-      res =>{
-        this.score = res.AnsAr[res.length-2] ;
-        this.qno = (res.length - 2 );
-        for(var i = 0; i< res.length-2; i++){
-          this.results[i] = res.AnsAr[i];
-        }
-          console.log(res);
-      },
-      err =>{
-        console.log(err);
-      }
-    )
-    document.getElementById('score').style.display='inline-block';
-  }
   Finish(){
     document.getElementById('split-right').style.display='none';
+    document.getElementById('uploadpdf').style.display='none';
     document.getElementById('eval').style.display='inline-block';
     document.getElementById('pdfdisplay').style.display='none';
     document.getElementById('devs').style.position='relative';
     document.getElementById('devs').style.top='50%';
   }
- onFileSelectedMultiple(){
-   var payload  = new FormData;
-   
-    if (files.length > 0) {
-     for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
-                    console.log(file)
-                    console.log(files.length)
-                    payload.append('image', file);
-                }
-            }
+ onFileSelectedMultiple(event:any){
+   this.bulkSelectedFiles = event.target.files;
+   console.log("Files selected in Bulk");
+   console.log(this.bulkSelectedFiles);
  }
  OnUploadMultiple(){
+   this.http.get<any>('http://localhost:3000/setdate').subscribe(
+     res=>{
+       if(res.status == true){
+         var payload  = new FormData;
+         for(var i = 0; i<this.bulkSelectedFiles.length;i++){
+             payload.append('pdf', this.bulkSelectedFiles[i], this.bulkSelectedFiles[i].name);
+           }
+         this.http.post<any>('http://localhost:3000/uploadmultiple', payload).subscribe(
+             res=>{
+               if(res.status==true){
+                this.http.get<any>('http://localhost:3000/startprocess').subscribe(
+                  res=>{
+                    if(res.status==true){
 
+                    }
+                    console.log(res);
+                  });
+               }
+               console.log(res);
+          });
+       }
+      console.log(res);
+    });
+   
+ }
+ Evaluate(){
+   console.log("new evaluate starts")
+    this.http.get<any>('http://localhost:3000/startml2').subscribe(
+      res=>{
+        console.log(res);
+    });
+ }
+ ShowResult(){
+   this.http.get<any>('http://localhost:3000/fetchar').subscribe(res=>
+   {
+     this.newresults = [];
+     this.newresults.push(res.newar);
+     document.getElementById('score').style.display='inline-block';
+     console.log(res);
+   });
+ }
+ Align(){
+   this.http.get<any>('http://localhost:3000/align').subscribe(
+      res =>{
+        if(res.status==true){
+          document.getElementById('final').style.display='inline-block';
+        }
+        console.log(res);
+      });
  }
 }

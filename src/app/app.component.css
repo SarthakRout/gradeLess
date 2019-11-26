@@ -118,10 +118,10 @@ div{
 	font-family: 'Montserrat', sans-serif;
 }
 #pdfdisplay{
-	width:800px;	
+	width:850px;	
 	float:left;
 	margin-top: 2%;
-	height: 990px;
+	height: 1000px;
 	border: 5px solid #000000 ;
 	background-color: #ffffff;
 }
@@ -211,9 +211,10 @@ div{
 	background-color:  rgb(54, 54, 54);
 	color: white;
 	padding: 12px;
-	width: 100px;
+	width: 115px;
+	border-radius: 10px;
 	border: none;
-	font-size: 16px;
+	font-size: 18px;
 	box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
 	-webkit-appearance: button;
 	appearance: button;

@@ -1,4 +1,3 @@
-
 <div id ="about">
 	<p id="heading">gradeLess</p>
 
@@ -15,12 +14,11 @@
 		answer copies using 
 		Machine Learning for Character Recognition effortlessly to save
 		the precious time of instructors and tutors grading answers manually.<br>
-		Currently we support questions with binary answers (True / False) , we
-		plan to extend full support for Multiple Choice Questions .<br>
+		Currently, we support questions with binary answers (True / False) and  Single/Multiple Choice Questions .<br>
 		The Frontend is designed using CSS and JS (for the beauty part) and 
 		Angular 8 for most of the actual work ,that is evaluation of answer copies.<br>
 		The Backend is developed using Express.js and it is middleware between our Frontend and Python program
-		which uses OpenCV for image processing and employs 
+		which uses OpenCV for image processing and employs Tesseract Engine which uses
 		Machine Learning Algorithms for correctly evaluating the answers.
 	</p>
 </div>
@@ -33,7 +31,7 @@
 
 	<div id="pdfdisplay" (click) = "showcoord($event)" >
 
-		<img src="{{imgArray[imgindex]}}" id ="show_image" alt="No image found. Contact Admin.">
+		<img src="{{imgArray[imgindex]}}" id ="show_image" alt="No image found. Contact Admin." width="840f" height = "990">
 
 	</div>
 	<div id = "uploadpdf">
@@ -57,7 +55,7 @@
 	  
 	<div id = "split-right">
 		<div class ="row">
-			<h3>Selected Coordinate - &nbsp; ({{x}} &nbsp;,&nbsp;{{y}})</h3>
+			<h3>Selected Coordinate - &nbsp; ({{x}} &nbsp;, &nbsp;{{y}})</h3>
 			<h3></h3>
 		</div>
 		
@@ -84,7 +82,7 @@
 							<h3>BotRightY:</h3> <input formControlName="yref21" id = "yref21" class="form-control " />
 						</div>
 						<div class = "row" id="ref">
-						<button type = "button" (click) =  "setRef1()" class="btn btn-primary btn-sm"> Set Reference 2 </button> <br>
+						<button type = "button" (click) =  "setRef2()" class="btn btn-primary btn-sm"> Set Reference 2 </button> <br>
 						</div>
 					</div>
 					<br>
@@ -99,7 +97,7 @@
 				<br><br>
 				<div class = "row">
 					<div class="box">	<h3>Type:</h3>
-						<select formControlName = "qtype" (change) = "typechange($event)" novalidate>
+						<select formControlName = "qtype" novalidate>
 							<option *ngFor = "let choice of types" [value] = "choice">
 								{{choice}}
 							</option>
@@ -132,12 +130,26 @@
 				</div>
 				<div class ="row">
 					<div class="col-xs-3">
-						<button type ="button" class = "btn btn-info" (click)="onUploadMultiple()">Upload Multiple PDF</button> 
+						<button type ="button" class = "btn btn-info" (click)="OnUploadMultiple()">Upload Multiple PDF</button> 
 					</div>
 				</div>
 				<div class="row">
 					<div class = "col-xs-3">
+						<button type="button" class="btn btn-info" (click) = "Align()"> Align</button>
+					</div>
+
+				</div>
+			</div>
+			<div id="final" style="display: none;">
+				<div class="row">
+					<div class = "col-xs-3">
 						<button type="button" class="btn btn-info" (click) = "Evaluate()"> Evaluate</button>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class = "col-xs-3">
+						<button type="button" class="btn btn-info" (click) = "ShowResult()"> Show - Result </button>
 					</div>
 
 				</div>
@@ -146,15 +158,16 @@
 			<div id="score" style="display: none;">
 
 			<div class="row">
-				Score : {{score}} out of {{qno}}
+				No. of Questions: {{qno}}
 			</div>
-
-			 <ul>
-			 	<div class = "row" id = "list">
-			 			
-			 		<li *ngFor="let result of results"> {{ result }} </li>
-			 			
-			 	</div>
+			<ul>
+				<li *ngFor ="let studentres of newresults">
+			 		<div class = "row" id = "list" >
+			 			<ul>
+			 				<li *ngFor="let qkeyeval of studentres; let i = index; let l = count"> {{qkeyeval }} </li>
+			 			</ul>
+			 		</div>
+ 				</li>
  			</ul>
 		</div>
 	</div>
@@ -228,6 +241,3 @@
 			</a>
 		</div>
 </div>	
-	  
-	
-
