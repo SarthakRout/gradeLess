@@ -1,4 +1,5 @@
 # OCR - gradeLess - ESC101 Advanced Track Project
+## Check our some screenshots at https://drive.google.com/drive/folders/1p1K3cN9Kj3J1IvW3LtlGJe_Bok2bSN5P
 ## Files used for server-side in 'server' folder
 1. server.js
 2. pdf2img.py
